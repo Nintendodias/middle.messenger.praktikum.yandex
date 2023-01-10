@@ -11,7 +11,7 @@ Parcel, EJS, Express JS
 
 ## **Полезные ссылки**
 
-![Ссылки]() - ссылка на Netlify
+![Ссылки](https://subtle-khapse-af4972.netlify.app/) - ссылка на Netlify
 ![Ссылки](https://parceljs.org/docs/)
 ![Ссылки](https://ejs.co/)
 ![Ссылки](https://expressjs.com/ru/guide/routing.html)
