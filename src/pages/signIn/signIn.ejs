@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../components/Head/head')%>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Регистрация</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-container">
+          <form class="form">
+            <p class="form__title">Регистрация</p>
+            <div class="form__item">
+              <label for="email" class="form__label">Почта</label>
+              <input type="email" id="email" name="email" class="form__input">
+            </div>
+            <div class="form__item">
+                <label for="login" class="form__label">Логин</label>
+                <input type="text" id="login" name="login" class="form__input">
+            </div>
+            <div class="form__item">
+                <label for="first_name" class="form__label">Имя</label>
+                <input type="text" id="first_name" name="first_name" class="form__input">
+            </div>
+            <div class="form__item">
+                <label for="second_name" class="form__label">Фамилия</label>
+                <input type="text" id="second_name" name="second_name" class="form__input">
+            </div>
+            <div class="form__item">
+                <label for="phone" class="form__label">Телефон</label>
+                <input type="tel" id="phone" name="phone" class="form__input">
+            </div>
+            <div class="form__item">
+                <label for="password" class="form__label">Пароль</label>
+                <input type="password" id="password" name="password" class="form__input">
+            </div>
+            <div class="form__item">
+                <label for="password" class="form__label">Пароль (ещё раз)</label>
+                <input type="password" id="repeat_password" name="password" class="form__input">
+            </div>
+            <%- include('../../components/Buttons/Buttons', {"value": 'Зарегистрироваться', "className": 'form__button'})%> 
+          </form>
+          <%- include('../../components/Links/Links', {'link': '../login/login.ejs', 'className': 'text-center', 'text': 'Войти'})%> 
+        </div>
+      </div>
+</body>
+</html>

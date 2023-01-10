@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../components/Head/head')%>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Логин</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-container">
+          <form class="form">
+            <p class="form__title">Вход</p>
+            <div class="form__item">
+              <label for="login" class="form__label">Логин</label>
+              <input type="text" id="login" name="login" class="form__input">
+            </div>
+            <div class="form__item">
+              <label for="password" class="form__label">Пароль</label>
+              <input type="password" id="password" name="password" class="form__input">
+            </div>
+            <%- include('../../components/Buttons/Buttons', {'value': 'Авторизоваться', 'className': 'form__button'})%> 
+          </form>
+          <%- include('../../components/Links/Links', {'link': '../signIn/signIn.ejs', 'className': 'text-center', 'text': 'Нет аккаунта?'})%> 
+        </div>
+    </div>
+</body>
+</html>

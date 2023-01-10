@@ -1,0 +1,147 @@
+<%
+    const contacts = [
+        {
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },
+        {
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },
+    ];
+
+    const messages = [
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.'
+        },
+    ];
+%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../components/Head/head')%>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Чат</title>
+</head>
+<body>
+    <div class="chat">
+        <div class="chat__menu">
+            <div class="menu__header">
+                <img class="burger_menu" src="../../static/icons/burger.svg" alt="" width="25" height="25">
+                <div class="modal">
+                    <button class="btn-link"><a href="../profile/profile.ejs">Профиль</a></button>
+                    <button class="btn-link">Добавить пользователя</button>
+                    <button class="btn-link">Удалить пользователя</button>
+                </div>
+            </div>
+            <div class="menu__search">
+                <label for="search">Поиск</label>
+                <input type="text" id="search" name="search">
+            </div>
+            <div class="menu__list">
+                <% contacts.forEach(contact => { %> 
+                    <%- include('../../components/ContactsItems/ContactsItems', {'avatar': `${contact.avatar}`, 'name': `${contact.name}`, 'lastMsg': `${contact.lastMsg}`, 'date': `${contact.date}`, 'unreadMsg': contact.unreadMsg,}) %>
+                <% }) %>
+            </div>
+        </div>
+        <div class="chat__messages">
+            <div class="messages__header">
+                <img class="messages__header-avatar" src="../../static/assets/avatar.png" alt="" width="34">
+                <p class="messages__header-name">Имя</p>
+            </div>
+            <div class="messages__wrapper">
+                <% messages.forEach(message => { %> 
+                    <%- include('../../components/Messages/Messages', {'isSelf': message.isSelf, 'text': `${message.text}`}) %>
+                <% }) %>
+            </div>
+            <div class="messages__footer">
+                <img src="../../static/icons/includes.svg" alt="">
+                <form class="messages__footer-msg" action="" method="post">
+                    <textarea rows="1" cols="15" name="message" class="msg__textarea" placeholder="Сообщение"></textarea>
+                    <input type="submit" value="" class="msg__submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
