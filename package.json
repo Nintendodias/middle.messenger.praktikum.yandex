@@ -1,9 +1,9 @@
 {
   "name": "my-project",
-  "source": "src/index.ejs",
+  "source": "./src/index.ejs",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel --open",
+    "dev": "parcel --open --no-cache ./src/index.ejs",
     "build": "parcel build",
     "start": "node ./server.js"
   },
