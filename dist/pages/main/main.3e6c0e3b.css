@@ -1,5 +1,6 @@
 .chat {
   height: 100vh;
+  width: 100%;
   justify-content: center;
   align-items: stretch;
   display: flex;
@@ -10,82 +11,291 @@
   max-width: 310px;
   width: 100%;
   min-height: 100vh;
-  background-color: #add8e6;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: #fbfbfb;
   overflow-y: scroll;
 }
 
+.chat .chat__menu::-webkit-scrollbar {
+  display: none;
+}
+
 .chat .chat__messages {
-  max-width: calc(100% - 310px);
   width: 100%;
   min-height: 100vh;
-  align-items: space-between;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0 20px;
   display: flex;
 }
 
-.messages__header {
+.chat__menu .menu__list {
+  padding: 14px 10px;
+}
+
+.chat__menu .menu__search {
+  padding: 0 10px;
+}
+
+.chat__menu .menu__search input {
+  width: 100%;
+  height: 32px;
+  background: #efefef;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  padding: 0 10px;
+}
+
+.chat__menu .menu__header {
+  padding: 10px;
+}
+
+.chat__menu .menu__header img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.chat__menu .menu__header .tooltip {
+  top: 50px;
+  left: 10px;
+}
+
+.chat__messages .messages__header {
   height: 54px;
-  background-color: #90ee90;
+  border-bottom: 1px solid #eaeaea;
   justify-content: flex-start;
   align-items: center;
   gap: 0 10px;
   display: flex;
 }
 
-.messages__wrapper {
+.chat__messages .messages__header .messages__header-name {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+.chat__messages .messages__wrapper {
   height: calc(100% - 86px);
-  background-color: #ffffe0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   flex-direction: column;
   justify-content: flex-start;
   display: flex;
   overflow-y: scroll;
 }
 
-.messages__wrapper .message__item {
-  text-align: left;
-  width: 100%;
+.chat__messages .messages__wrapper::-webkit-scrollbar {
+  display: none;
 }
 
-.messages__wrapper .message__item.--self {
+.chat__messages .messages__footer {
+  border-top: 1px solid #eaeaea;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0 10px;
+  padding: 10px 0;
+  display: flex;
+}
+
+.chat__messages .messages__footer-msg {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0 10px;
+  display: flex;
+}
+
+.chat__messages .messages__footer .msg__textarea {
+  width: 100%;
+  resize: none;
+  color: #999;
+  background: #eaeaea;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+.chat__messages .messages__footer .msg__submit {
+  width: 28px;
+  cursor: pointer;
+}
+
+.chat__messages .messages__footer .msg__include {
+  position: relative;
+}
+
+.chat__messages .messages__footer .msg__include img {
+  cursor: pointer;
+}
+
+.chat__messages .messages__footer .msg__include .tooltip {
+  bottom: 50px;
+  left: 10px;
+}
+
+.tooltip {
+  z-index: 100;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  display: none;
+  position: absolute;
+  box-shadow: 0 0 6px #00000024;
+}
+
+.tooltip._active {
+  display: block;
+}
+
+.tooltip .tooltip__link {
+  cursor: pointer;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0 15px;
+  display: flex;
+}
+
+.tooltip .tooltip__link .tooltip__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.tooltip .tooltip__link .tooltip__title, .tooltip .tooltip__link .tooltip__title a {
+  color: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  text-decoration: none;
+}
+
+.tooltip .tooltip__link + .tooltip__link {
+  margin-top: 16px;
+}
+
+.message__item {
+  text-align: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.message__item.--self {
   text-align: right;
 }
 
-.messages__wrapper .message__item > div {
+.message__item.--self .message__item-inner {
+  border-radius: 20px 2px 2px 20px;
+}
+
+.message__item.--last .message__item-inner {
+  background: #e4edfd;
+}
+
+.message__item.--last .message__item-inner .message__item-date {
+  color: #3369f3;
+}
+
+.message__item .message__item-inner {
   max-width: 50%;
   width: auto;
+  background: #eaeaea;
+  border-radius: 2px 20px 20px 2px;
+  padding: 11px;
   display: inline-block;
 }
 
-.messages__footer {
-  background-color: #90ee90;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 0 10px;
+.message__item .message__item-inner .message__item-text {
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.message__item .message__item-inner .message__item-date {
+  text-align: right;
+  color: #999;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 9px;
+}
+
+.menu__list-item {
+  height: 72px;
+  cursor: pointer;
+  border-top: 1px solid #eaeaea;
+  grid-template: "avatar name date" 1fr
+                 "avatar msg date" 2fr
+                 / .5fr 1.5fr .5fr;
+  place-content: space-between;
+  place-items: stretch stretch;
+  gap: 4px 10px;
+  padding: 12px 0;
+  display: grid;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu__list-item .item__avatar {
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  grid-area: avatar;
+}
+
+.menu__list-item .item__name {
+  grid-area: name;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+.menu__list-item .item__lastMsg {
+  color: #999;
+  grid-area: msg;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.menu__list-item .item__time {
+  text-align: right;
+  color: #999;
+  grid-area: date;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13px;
+}
+
+.menu__list-item .item_unreadMsg {
+  color: #fff;
+  background: #3369f3;
+  border-radius: 11px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 7px;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
   display: flex;
-}
-
-.messages__footer-msg {
-  width: 100%;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 0 10px;
-  display: flex;
-}
-
-.messages__footer .msg__textarea {
-  width: 100%;
-  resize: none;
-}
-
-.messages__footer .msg__submit {
-  width: 28px;
-}
-
-
-
-h1 {
-  color: green;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
 }
 
 /*# sourceMappingURL=main.3e6c0e3b.css.map */

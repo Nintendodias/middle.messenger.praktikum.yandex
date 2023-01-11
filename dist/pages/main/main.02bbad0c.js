@@ -533,7 +533,25 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"hT6QD":[function(require,module,exports) {
 var _indexLess = require("./index.less");
+var _indexJs = require("../../components/ContactsItems/index.js");
+var _indexJs1 = require("../../components/Messages/index.js");
+const menu = document.querySelector(".burger__menu");
+menu.addEventListener("click", (e)=>{
+    const tooltip = document.querySelector(".chat__menu .tooltip");
+    tooltip.classList.toggle("_active");
+});
+const include = document.querySelector(".msg__include img");
+include.addEventListener("click", (e)=>{
+    const tooltip = document.querySelector(".chat__messages .tooltip");
+    tooltip.classList.toggle("_active");
+});
 
-},{"./index.less":"hUSVY"}],"hUSVY":[function() {},{}]},["bwfTh","hT6QD"], "hT6QD", "parcelRequire716c")
+},{"./index.less":"hUSVY","../../components/ContactsItems/index.js":"ln3yn","../../components/Messages/index.js":"c30Mn"}],"hUSVY":[function() {},{}],"ln3yn":[function(require,module,exports) {
+var _indexLess = require("./index.less");
+
+},{"./index.less":"jRevl"}],"jRevl":[function() {},{}],"c30Mn":[function(require,module,exports) {
+var _indexLess = require("./index.less");
+
+},{"./index.less":"hQFEW"}],"hQFEW":[function() {},{}]},["bwfTh","hT6QD"], "hT6QD", "parcelRequire716c")
 
 //# sourceMappingURL=main.02bbad0c.js.map

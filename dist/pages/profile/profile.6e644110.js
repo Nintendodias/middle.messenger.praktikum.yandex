@@ -533,7 +533,73 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"14hhl":[function(require,module,exports) {
 var _indexLess = require("./index.less");
+var _indexJs = require("../../components/Input/index.js");
+var _indexJs1 = require("../../components/Buttons/index.js");
+var _indexJs2 = require("../../components/Links/index.js");
+var _indexJs3 = require("../../components/Avatar/index.js");
+const buttons = document.querySelectorAll("[data-button]");
+const changeDataButton = document.querySelector(".btn-link");
+changeDataButton.addEventListener("click", (e)=>{
+    const form = document.querySelector('[data-form="profile-data"]');
+    const inputs = form.querySelectorAll(".form__input");
+    const button = document.querySelector(".--main");
+    form.classList.add("_active");
+    inputs.forEach((input)=>{
+        input.readOnly = false;
+    });
+    button.addEventListener("click", (e)=>{
+        e.preventDefault();
+        form.classList.remove("_active");
+        inputs.forEach((input)=>{
+            input.readOnly = true;
+        });
+    });
+});
+buttons.forEach((button)=>{
+    button.addEventListener("click", (e)=>{
+        const buttonDataset = +button.dataset.button;
+        const modal = document.querySelector(`[data-modal="${buttonDataset}"]`);
+        const close = modal.querySelector(".modal_close");
+        modal.classList.add("_active");
+        close.addEventListener("click", ()=>{
+            modal.classList.remove("_active");
+        });
+        if (buttonDataset === 1) setChangePassword(modal);
+        if (buttonDataset === 2) setInputTypeFile(modal);
+    });
+});
+function setChangePassword(modal) {
+    console.log("Открытие окна для смены пароля");
+}
+function setInputTypeFile(modal) {
+    const input = modal.querySelector("input");
+    const button = modal.querySelector(".form__button");
+    input.addEventListener("change", function() {
+        const file = this.files[0];
+        if (file) {
+            const span = modal.querySelector(".input-file-text");
+            span.innerText = file.name;
+            button.removeAttribute("disabled");
+            button.addEventListener("click", (e)=>{
+                console.log("Фотография заменена");
+                e.preventDefault();
+            });
+        }
+    });
+}
 
-},{"./index.less":"bq5OW"}],"bq5OW":[function() {},{}]},["hETuT","14hhl"], "14hhl", "parcelRequire716c")
+},{"./index.less":"bq5OW","../../components/Input/index.js":"gqjG0","../../components/Buttons/index.js":"7DjPu","../../components/Links/index.js":"bjDUx","../../components/Avatar/index.js":"3UAdy"}],"bq5OW":[function() {},{}],"gqjG0":[function(require,module,exports) {
+var _indexLess = require("./index.less");
+
+},{"./index.less":"dNtyG"}],"dNtyG":[function() {},{}],"7DjPu":[function(require,module,exports) {
+var _indexLess = require("./index.less");
+
+},{"./index.less":"7wiSO"}],"7wiSO":[function() {},{}],"bjDUx":[function(require,module,exports) {
+var _indexLess = require("./index.less");
+
+},{"./index.less":"3XaMl"}],"3XaMl":[function() {},{}],"3UAdy":[function(require,module,exports) {
+var _indexLess = require("./index.less");
+
+},{"./index.less":"jqyI1"}],"jqyI1":[function() {},{}]},["hETuT","14hhl"], "14hhl", "parcelRequire716c")
 
 //# sourceMappingURL=profile.6e644110.js.map

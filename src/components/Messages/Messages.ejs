@@ -1,7 +1,6 @@
-<script type="module" src="../../components/Messages/index.js"></script>
-
-<div class="message__item <%= isSelf === true ? '--self' : '' %>">
-    <div>
-        <%= text %>
+<div class="message__item <%= isSelf === true ? '--self' : '' %> <%= index === true ? '--last' : '' %>">
+    <div class="message__item-inner">
+        <p class="message__item-text"><%= text %></p>
+        <p class="message__item-date"><%= date %></p>
     </div>
 </div>

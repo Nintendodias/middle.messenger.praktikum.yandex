@@ -8,8 +8,8 @@
 <body>
     <main class="wrapper">
         <div>
-            <h1>404</h1>
-            <p>Не туда попали</p>
+            <%- include('../../components/Title40/Title40', {'text': '404'})%> 
+            <%- include('../../components/Title20/Title20', {'text': 'Не туда попали'})%> 
             <%- include('../../components/Links/Links', {'link': '../main/main.ejs', 'className': 'text-center', 'text': 'Назад к чатам'})%> 
         </div>
     </main>

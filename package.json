@@ -3,7 +3,7 @@
   "source": "./src/index.ejs",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "dev": "parcel --open --no-cache ./src/index.ejs",
+    "dev": "parcel --no-cache ./src/index.ejs",
     "build": "parcel build",
     "start": "node ./server.js"
   },

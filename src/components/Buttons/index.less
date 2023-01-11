@@ -1,4 +1,4 @@
-@import "../../colors.less";
+@import "../../baseui/colors.less";
 
 .button {
     background-color: @color-blue;
@@ -11,4 +11,9 @@
     display: block;
     max-width: 280px;
     margin: 0 auto;
+
+    &[disabled] {
+        background-color: @color-grey;
+        cursor: default;
+    }
 }
