@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <%- include('../../components/Head/head')%>
     <link rel="stylesheet" href="../../global.less" />
     <title>Логин</title>
 </head>
 <body>
-    <div class="wrapper">
+    <main class="wrapper">
         <div class="form-container">
           <form class="form">
             <p class="form__title">Вход</p>
@@ -22,6 +22,6 @@
           </form>
           <%- include('../../components/Links/Links', {'link': '../signIn/signIn.ejs', 'className': 'text-center', 'text': 'Нет аккаунта?'})%> 
         </div>
-    </div>
+    </main>
 </body>
 </html>
