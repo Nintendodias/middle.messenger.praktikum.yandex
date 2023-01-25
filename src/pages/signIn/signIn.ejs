@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <%- include('../../components/Head/head')%>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Регистрация</title>
+</head>
+<body>
+    <main class="wrapper">
+        <div class="form-container">
+          <form class="form">
+            <%- include('../../components/Title20/Title20', {'text': 'Регистрация'})%> 
+            <div>
+              <%- include('../../components/Input/Input', {'labelFor': 'email', 'labelText': 'Почта', 'inputType': 'email', 'inputId': 'email', 'inputName': 'email', 'value': '', 'readonly': false})%>
+              <%- include('../../components/Input/Input', {'labelFor': 'login', 'labelText': 'Логин', 'inputType': 'text', 'inputId': 'login', 'inputName': 'login', 'value': '', 'readonly': false})%>
+              <%- include('../../components/Input/Input', {'labelFor': 'first_name', 'labelText': 'Имя', 'inputType': 'text', 'inputId': 'first_name', 'inputName': 'first_name', 'value': '', 'readonly': false})%>
+              <%- include('../../components/Input/Input', {'labelFor': 'second_name', 'labelText': 'Фамилия', 'inputType': 'text', 'inputId': 'second_name', 'inputName': 'second_name', 'value': '', 'readonly': false})%>
+              <%- include('../../components/Input/Input', {'labelFor': 'phone', 'labelText': 'Телефон', 'inputType': 'tel', 'inputId': 'phone', 'inputName': 'phone', 'value': '', 'readonly': false})%>
+              <%- include('../../components/Input/Input', {'labelFor': 'password', 'labelText': 'Пароль', 'inputType': 'password', 'inputId': 'password', 'inputName': 'password', 'value': '', 'readonly': false})%>
+              <%- include('../../components/Input/Input', {'labelFor': 'repeat_password', 'labelText': 'Пароль (ещё раз)', 'inputType': 'password', 'inputId': 'repeat_password', 'inputName': 'repeat_password', 'value': '', 'readonly': false})%>
+            </div>
+            <%- include('../../components/Buttons/Buttons', {"value": 'Зарегистрироваться', "className": 'form__button', 'disabled': false})%> 
+          </form>
+          <%- include('../../components/Links/Links', {'link': '../login/login.ejs', 'className': 'text-center', 'text': 'Войти'})%> 
+        </div>
+    </main>
+</body>
+</html>

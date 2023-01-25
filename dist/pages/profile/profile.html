@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- <script type="module" src="./templates/head.js"></script> -->
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/pages/login/login.444dd7df.css"><link rel="stylesheet" href="/pages/profile/profile.b7159ff8.css"><script src="/pages/profile/profile.6e644110.js" defer=""></script>
+
+    <link rel="stylesheet" href="/index.6023375b.css">
+    <title>Профиль</title>
+</head>
+<body>
+    <main class="wrapper">
+        <div class="form-container">
+            <div class="profile_avatar" data-button="2">
+    <img src="/avatar.4b61186d.png" alt="">
+</div> 
+            <form class="form" data-form="profile-data">
+                <h1 class="title20">Имя пользователя</h1>
+ 
+                <div>
+                    <div class="form__item">
+    <label for="email" class="form__label">Почта</label>
+    <input type="email" id="email" name="email" value="pochta@yandex.ru" readonly="" class="form__input">
+</div>
+                    <div class="form__item">
+    <label for="login" class="form__label">Логин</label>
+    <input type="text" id="login" name="login" value="ivanivanov" readonly="" class="form__input">
+</div>
+                    <div class="form__item">
+    <label for="first_name" class="form__label">Имя</label>
+    <input type="text" id="first_name" name="first_name" value="Иван" readonly="" class="form__input">
+</div>
+                    <div class="form__item">
+    <label for="second_name" class="form__label">Фамилия</label>
+    <input type="text" id="second_name" name="second_name" value="Иванов" readonly="" class="form__input">
+</div>
+                    <div class="form__item">
+    <label for="display_name" class="form__label">Имя в чате</label>
+    <input type="text" id="display_name" name="display_name" value="Иван" readonly="" class="form__input">
+</div>
+                    <div class="form__item">
+    <label for="phone" class="form__label">Телефон</label>
+    <input type="tel" id="phone" name="phone" value="+7(909)9673030" readonly="" class="form__input">
+</div>
+                </div>
+                <input type="submit" value="Сохранить" class="button form__button --main">
+
+            </form>
+            <button class="btn btn-link">Изменить данные</button>
+            <button class="btn btn-link" data-button="1">Изменить пароль</button>
+            <a href="/pages/main/main.html" class="btn btn-return">Выйти</a>
+            <div class="modal" data-modal="1">
+                <div>
+                    <form class="form">
+                        <div>
+                            <div class="form__item">
+                                <label for="oldPassword" class="form__label">Старый пароль</label>
+                                <input type="password" id="oldPassword" name="oldPassword" class="form__input">
+                            </div>
+                            <div class="form__item">
+                                <label for="newPassword" class="form__label">Новый пароль</label>
+                                <input type="password" id="newPassword" name="newPassword" class="form__input">
+                            </div>
+                            <div class="form__item">
+                                <label for="repeatPassword" class="form__label">Повторите новый пароль</label>
+                                <input type="password" id="repeatPassword" name="repeatPassword" class="form__input">
+                            </div>
+                        </div>
+                        <input type="submit" value="Сохранить" class="button form__button" disabled="">
+
+                    </form>
+                    <img class="modal_close" src="/close.0dccbcc2.svg" alt="">
+                </div>
+            </div>
+            <div class="modal" data-modal="2">
+                <div>
+                    <h1 class="title20">Загрузите файл</h1>
+
+                    <form method="post" enctype="multipart/form-data">
+                        <label class="input-file">
+                            <span class="input-file-text" type="text"></span>
+                            <input type="file" name="file" accept="image/*,image/jpeg">        
+                            <span class="input-file-btn">Выберите файл</span>
+                         </label>
+                         <input type="submit" value="Поменять" class="button form__button" disabled="">
+
+                    </form>
+                    <img class="modal_close" src="/close.0dccbcc2.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

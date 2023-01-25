@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <%- include('../../components/Head/head')%>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Ошибка 500</title>
+</head>
+<body>
+    <main class="wrapper">
+        <div>
+            <%- include('../../components/Title40/Title40', {'text': '500'})%> 
+            <%- include('../../components/Title20/Title20', {'text': 'Мы уже фиксим'})%> 
+            <%- include('../../components/Links/Links', {'link': '../main/main.ejs', 'className': 'text-center', 'text': 'Назад к чатам'})%> 
+        </div>
+    </main>
+</body>
+</html>

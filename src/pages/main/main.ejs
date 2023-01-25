@@ -1,0 +1,335 @@
+<%
+    const contacts = [
+        {
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },
+        {
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },{
+            'avatar': '../../static/assets/avatar.png',
+            'name': 'Имя',
+            'lastMsg': 'Последнее сообщение',
+            'date': '00.00',
+            'unreadMsg': 0
+        },
+    ];
+
+    const messages = [
+        {
+            'isSelf': false,
+            'text': 'Lorem ',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': false,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+        {
+            'isSelf': true,
+            'text': 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
+            'date': '00:00'
+        },
+    ];
+%>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <%- include('../../components/Head/head')%>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Чат</title>
+</head>
+<body>
+    <main class="chat">
+        <div class="chat__menu">
+            <div class="menu__header">
+                <img class="burger__menu" src="../../static/icons/burger.svg" alt="" width="25" height="25">
+                <div class="tooltip">
+                    <div class="tooltip__link">
+                        <img class="tooltip__icon" src="../../static/icons/profile.svg" alt="">
+                        <span class="tooltip__title"><a href="../profile/profile.ejs">Профиль</a></span>
+                    </div>
+                    <div class="tooltip__link">
+                        <img class="tooltip__icon" src="../../static/icons/add.svg" alt="">
+                        <span class="tooltip__title">Добавить пользователя</button></span>
+                    </div>
+                    <div class="tooltip__link">
+                        <img class="tooltip__icon" src="../../static/icons/delete.svg" alt="">
+                        <span class="tooltip__title">Удалить пользователя</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu__search">
+                <input type="text" id="search" name="search" placeholder="Поиск">
+            </div>
+            <div class="menu__list">
+                <% contacts.forEach(contact => { %> 
+                    <%- include('../../components/ContactsItems/ContactsItems', {'avatar': `${contact.avatar}`, 'name': `${contact.name}`, 'lastMsg': `${contact.lastMsg}`, 'date': `${contact.date}`, 'unreadMsg': contact.unreadMsg,}) %>
+                <% }) %>
+            </div>
+        </div>
+        <div class="chat__messages">
+            <div class="messages__header">
+                <img class="messages__header-avatar" src="../../static/assets/avatar.png" alt="" width="34">
+                <p class="messages__header-name">Имя</p>
+            </div>
+            <div class="messages__wrapper">
+                <% messages.forEach((message, index) => { %> 
+                    <%- include('../../components/Messages/Messages', {'isSelf': message.isSelf, 'text': `${message.text}`, 'date': message.date, 'index': index === messages.length - 1 }) %>
+                <% }) %>
+            </div>
+            <div class="messages__footer">
+                <div class="msg__include">
+                    <img src="../../static/icons/includes.svg" alt="">
+                    <div class="tooltip">
+                        <div class="tooltip__link">
+                            <img class="tooltip__icon" src="../../static/icons/photo.svg" alt="">
+                            <span class="tooltip__title"><a href="../profile/profile.ejs">Фото&nbsp;или&nbsp;Видео</a></span>
+                        </div>
+                        <div class="tooltip__link">
+                            <img class="tooltip__icon" src="../../static/icons/file.svg" alt="">
+                            <span class="tooltip__title">Файл</button></span>
+                        </div>
+                        <div class="tooltip__link">
+                            <img class="tooltip__icon" src="../../static/icons/location.svg" alt="">
+                            <span class="tooltip__title">Локация</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="messages__footer-msg" action="" method="post">
+                    <textarea rows="1" cols="15" name="message" class="msg__textarea" placeholder="Сообщение"></textarea>
+                    <img src="../../static/icons/arrow.svg" alt="" class="msg__submit">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

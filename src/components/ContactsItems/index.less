@@ -1,0 +1,72 @@
+@import '../../baseui/colors.less';
+
+.menu__list-item {
+    position: relative;
+    display: grid; 
+    grid-template-columns: 0.5fr 1.5fr 0.5fr; 
+    grid-template-rows: 1fr 2fr; 
+    gap: 4px 10px; 
+    grid-template-areas: 
+        "avatar name date"
+        "avatar msg date"; 
+    justify-content: space-between; 
+    align-content: space-between; 
+    justify-items: stretch; 
+    align-items: stretch; 
+    padding: 12px 0;
+    border-top: 1px solid @color-lightgrey;
+    height: 72px;
+    overflow: hidden;
+    cursor: pointer;
+
+    .item__avatar { 
+        grid-area: avatar;
+        flex-shrink: 0;
+        width: 47px;
+        height: 47px;
+    }
+
+    .item__name { 
+        grid-area: name; 
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 13px;
+    }
+
+    .item__lastMsg { 
+        grid-area: msg; 
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        color: @color-grey;
+    }
+
+    .item__time { 
+        grid-area: date; 
+        font-style: normal;
+        font-weight: 500;
+        font-size: 9px;
+        line-height: 13px;
+        text-align: right;
+        color: @color-grey;
+    }
+
+    .item_unreadMsg { 
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        background: @color-blue;
+        border-radius: 11px;
+        color: @color-white;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px 7px;
+    }
+}
