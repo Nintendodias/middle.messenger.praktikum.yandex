@@ -1,29 +1,29 @@
-@import "../../baseui/colors.less";
-
-.form__item+.form__item {
-    margin-top: 16px;
-}
+@import url("../../baseui/colors.less");
 
 .form__item {
-    border-bottom: 1px solid @color-blue;
-    width: 100%;
-    padding-bottom: 5px;
+  border-bottom: 1px solid @color-blue;
+  width: 100%;
+  padding-bottom: 5px;
 
-    .form__label {
-        font-style: normal;
-        font-weight: 500;
-        font-size: 10px;
-        line-height: 10px;
-        color: @color-grey; 
-        display: block;
-    }
+  .form__label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 10px;
+    color: @color-grey;
+    display: block;
+  }
 
-    .form__input {
-        border: none;
-        outline: none;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 13px;
-    }
+  .form__input {
+    border: none;
+    outline: none;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 13px;
+  }
+}
+
+.form__item + .form__item {
+  margin-top: 16px;
 }

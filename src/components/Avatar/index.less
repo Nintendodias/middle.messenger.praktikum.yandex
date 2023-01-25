@@ -1,31 +1,31 @@
-@import "../../baseui/colors.less";
+@import url("../../baseui/colors.less");
 
 .profile_avatar {
-    cursor: pointer;
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 21px;
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
+  cursor: pointer;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 21px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
 
-    &:hover:after {
-        content: 'Поменять аватар';
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        background: #00000080;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 13px;
-        line-height: 14px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: @color-white;
-        padding: 10px;
-    }
+  &:hover::after {
+    content: "Поменять аватар";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #00000080;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: @color-white;
+    padding: 10px;
+  }
 }
