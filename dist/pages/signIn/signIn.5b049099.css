@@ -12,8 +12,30 @@
 }
 
 .form-container .form > div {
+  margin-bottom: 20px;
+}
+
+.form-container .form > div:nth-child(2) {
   min-height: 201px;
   margin-bottom: 47px;
+}
+
+.button {
+  width: 100%;
+  color: #fff;
+  cursor: pointer;
+  max-width: 280px;
+  background-color: #3369f3;
+  border: none;
+  border-radius: 8px;
+  margin: 0 auto;
+  padding: 12px;
+  display: block;
+}
+
+.button[disabled] {
+  cursor: default;
+  background-color: #999;
 }
 
 /*# sourceMappingURL=signIn.5b049099.css.map */

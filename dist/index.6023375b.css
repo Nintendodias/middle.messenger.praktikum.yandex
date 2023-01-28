@@ -30,17 +30,4 @@ img {
   text-align: center;
 }
 
-.dev_mode {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  position: fixed;
-  inset: 0;
-}
-
-.dev_mode > div {
-  max-width: 300px;
-  background-color: #add8e6;
-}
-
 /*# sourceMappingURL=index.6023375b.css.map */

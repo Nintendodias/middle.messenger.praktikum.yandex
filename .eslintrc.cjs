@@ -8,6 +8,7 @@ module.exports = {
     "no-param-reassign": 0,
     "max-len": [2, 100],
     "max-params": [2, 3],
+    "no-underscore-dangle": 'off' 
   },
   root: true,
   parserOptions: {
