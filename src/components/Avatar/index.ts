@@ -1,6 +1,6 @@
 import './index.less';
 import Block from '../../utils/Block';
-import templateFunction from './Avatar.hbs';
+import template from './Avatar.hbs';
 
 type TProps = Record<string, unknown>;
 
@@ -10,6 +10,6 @@ export default class Avatar extends Block {
   }
 
   render() {
-    return templateFunction(this.props);
+    return this.compile(template, { ...this.props });
   }
 }

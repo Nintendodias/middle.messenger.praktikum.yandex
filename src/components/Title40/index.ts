@@ -1,6 +1,6 @@
 import './index.less';
 import Block from '../../utils/Block';
-import templateFunction from './Title40.hbs';
+import template from './Title40.hbs';
 
 type TProps = Record<string, unknown>;
 
@@ -10,6 +10,6 @@ export default class Title40 extends Block {
   }
 
   render() {
-    return templateFunction(this.props);
+    return this.compile(template, { ...this.props });
   }
 }

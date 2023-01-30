@@ -62,6 +62,7 @@
   width: 100%;
   border-bottom: 1px solid #3369f3;
   padding-bottom: 5px;
+  position: relative;
 }
 
 .form__item .form__label {
@@ -83,8 +84,18 @@
   line-height: 13px;
 }
 
+.form__item .form__error {
+  color: red;
+  pointer-events: none;
+  font-size: 7px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(0, calc(100% + 3px));
+}
+
 .form__item + .form__item {
-  margin-top: 16px;
+  margin-top: 27px;
 }
 
 /*# sourceMappingURL=login.444dd7df.css.map */

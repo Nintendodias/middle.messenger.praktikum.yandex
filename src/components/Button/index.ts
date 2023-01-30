@@ -1,6 +1,6 @@
 import './index.less';
 import Block from '../../utils/Block';
-import templateFunction from './Button.hbs';
+import template from './Button.hbs';
 
 type TProps = Record<string, unknown>;
 
@@ -10,6 +10,6 @@ export default class Button extends Block {
   }
 
   render() {
-    return templateFunction(this.props);
+    return this.compile(template, { ...this.props });
   }
 }

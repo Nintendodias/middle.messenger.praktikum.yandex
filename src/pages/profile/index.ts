@@ -2,18 +2,27 @@ import './index.less';
 import Title20 from '../../components/Title20/index';
 import Render from '../../utils/Render';
 import Input from '../../components/Input/index';
+import { validate } from '../../utils/InputsValidation';
 import Button from '../../components/Button/index';
 import Links from '../../components/Links/index';
 import Avatar from '../../components/Avatar/index';
-import avatarImg from '../../static/assets/avatar.png';
+import { i_avatar } from '../../utils/StaticFileExport';
 import file from '../main/main.html';
 
 const TITLES = [
   {
-    text: 'Имя пользователя',
+    data: [
+      {
+        text: 'Имя пользователя',
+      },
+    ],
   },
   {
-    text: 'Загрузите файл',
+    data: [
+      {
+        text: 'Загрузите файл',
+      },
+    ],
   },
 ];
 
@@ -28,6 +37,10 @@ const INPUTS = [
         inputName: 'email',
         value: 'pochta@yandex.ru',
         readonly: 'readonly',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
         labelFor: 'login',
@@ -37,6 +50,10 @@ const INPUTS = [
         inputName: 'login',
         value: 'ivanivanov',
         readonly: 'readonly',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
         labelFor: 'first_name',
@@ -46,6 +63,10 @@ const INPUTS = [
         inputName: 'first_name',
         value: 'Иван',
         readonly: 'readonly',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
         labelFor: 'second_name',
@@ -55,6 +76,10 @@ const INPUTS = [
         inputName: 'second_name',
         value: 'Иванов',
         readonly: 'readonly',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
         labelFor: 'display_name',
@@ -64,6 +89,10 @@ const INPUTS = [
         inputName: 'display_name',
         value: 'Иван',
         readonly: 'readonly',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
         labelFor: 'phone',
@@ -71,8 +100,12 @@ const INPUTS = [
         inputType: 'tel',
         inputId: 'phone',
         inputName: 'phone',
-        value: '+7(909)9673030',
+        value: '+79099673030',
         readonly: 'readonly',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
     ],
   },
@@ -111,27 +144,55 @@ const INPUTS = [
 
 const BUTTONS = [
   {
-    value: 'Сохранить',
-    className: 'form__button --main',
-    disabled: false,
+    data: [
+      {
+        value: 'Сохранить',
+        className: 'form__button --main',
+        disabled: false,
+      },
+    ],
   },
   {
-    value: 'Сохранить',
-    className: 'form__button',
-    disabled: 'disabled',
+    data: [
+      {
+        value: 'Сохранить',
+        className: 'form__button',
+        disabled: 'disabled',
+      },
+    ],
   },
   {
-    value: 'Поменять',
-    className: 'form__button',
-    disabled: 'disabled',
+    data: [
+      {
+        value: 'Поменять',
+        className: 'form__button',
+        disabled: 'disabled',
+      },
+    ],
   },
 ];
 
 const LINKS = {
-  url: file,
-  className: '--red',
-  text: 'Выйти',
+  data: [
+    {
+      url: file,
+      className: '--red',
+      text: 'Выйти',
+    },
+  ],
 };
+
+const AVATAR = {
+  data: [
+    {
+      url: i_avatar,
+    },
+  ],
+};
+
+const avatar = new Avatar(AVATAR);
+
+Render('[data-render="avatar"]', avatar);
 
 const titles = document.querySelectorAll('[data-render="title20"]');
 
@@ -156,12 +217,6 @@ buttons.forEach((_button, index) => {
 
   Render('[data-render="button_wrapper"]', tmplTitle, index);
 });
-
-const avatar = new Avatar({
-  url: avatarImg,
-});
-
-Render('[data-render="avatar"]', avatar);
 
 const link = new Links(LINKS);
 
@@ -188,7 +243,9 @@ function setInputTypeFile(modal: Element) {
       const LoadFile = this.files[0];
 
       if (LoadFile) {
-        const span: HTMLElement | null = modal.querySelector('[data-render="input-file-text');
+        const span: HTMLElement | null = modal.querySelector(
+          '[data-render="input-file-text',
+        );
 
         if (span) {
           span.innerText = LoadFile.name;
@@ -210,10 +267,12 @@ if (changeDataButton) {
     const form = document.querySelector('[data-form="profile-data"]');
 
     if (form) {
-      const inputsElements = form.querySelectorAll('[data-render="form__input');
-      const button = document.querySelector('[data-render="--main');
+      const inputsElements = form.querySelectorAll('.form__input');
+      const button = document.querySelector('.--main');
 
       form.classList.add('_active');
+
+      console.log(inputsElements)
 
       inputsElements.forEach((input: HTMLInputElement) => {
         input.readOnly = false;

@@ -3,6 +3,7 @@ import Input from '../../components/Input/index';
 import Title20 from '../../components/Title20/index';
 import Button from '../../components/Button/index';
 import Render from '../../utils/Render';
+import { validate } from '../../utils/InputsValidation';
 import Links from '../../components/Links/index';
 import file from '../login/login.html';
 
@@ -16,6 +17,10 @@ const INPUTS = {
       inputName: 'email',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
     {
       labelFor: 'login',
@@ -25,6 +30,10 @@ const INPUTS = {
       inputName: 'login',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
     {
       labelFor: 'first_name',
@@ -34,6 +43,10 @@ const INPUTS = {
       inputName: 'first_name',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
     {
       labelFor: 'second_name',
@@ -43,6 +56,10 @@ const INPUTS = {
       inputName: 'second_name',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
     {
       labelFor: 'phone',
@@ -52,6 +69,10 @@ const INPUTS = {
       inputName: 'phone',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
     {
       labelFor: 'password',
@@ -61,6 +82,10 @@ const INPUTS = {
       inputName: 'password',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
     {
       labelFor: 'repeat_password',
@@ -70,24 +95,40 @@ const INPUTS = {
       inputName: 'repeat_password',
       value: '',
       readonly: '',
+      events: {
+        blur: validate,
+        focus: validate,
+      },
     },
   ],
 };
 
 const TITLE = {
-  text: 'Регистрация',
+  data: [
+    {
+      text: 'Регистрация',
+    },
+  ],
 };
 
 const BUTTON = {
-  value: 'Зарегистрироваться',
-  className: 'form__button',
-  disabled: '',
+  data: [
+    {
+      value: 'Зарегистрироваться',
+      className: 'form__button',
+      disabled: '',
+    },
+  ],
 };
 
 const LINKS = {
-  url: file,
-  className: 'text-center',
-  text: 'Войти',
+  data: [
+    {
+      url: file,
+      className: 'text-center',
+      text: 'Войти',
+    },
+  ],
 };
 
 const inputs = new Input(INPUTS);

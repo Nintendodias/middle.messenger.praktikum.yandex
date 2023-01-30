@@ -6,17 +6,29 @@ import Links from '../../components/Links/index';
 import file from '../main/main.html';
 
 const TITLE40 = {
-  text: '500',
+  data: [
+    {
+      text: '500',
+    },
+  ],
 };
 
 const TITLE20 = {
-  text: 'Мы уже фиксим',
+  data: [
+    {
+      text: 'Мы уже фиксим',
+    },
+  ],
 };
 
 const LINKS = {
-  url: file,
-  className: 'text-center',
-  text: 'Назад к чатам',
+  data: [
+    {
+      url: file,
+      className: 'text-center',
+      text: 'Назад к чатам',
+    },
+  ],
 };
 
 const title40 = new Title40(TITLE40);

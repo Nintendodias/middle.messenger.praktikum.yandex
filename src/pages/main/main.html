@@ -19,25 +19,14 @@
             <div class="menu__header">
                 <img class="burger__menu" src="../../static/icons/burger.svg" alt="" width="25" height="25">
                 <div class="tooltip">
-                    <div class="tooltip__link">
-                        <img class="tooltip__icon" src="../../static/icons/profile.svg" alt="">
-                        <span class="tooltip__title"><a href="../profile/profile.html">Профиль</a></span>
-                    </div>
-                    <div class="tooltip__link">
-                        <img class="tooltip__icon" src="../../static/icons/add.svg" alt="">
-                        <span class="tooltip__title">Добавить пользователя</button></span>
-                    </div>
-                    <div class="tooltip__link">
-                        <img class="tooltip__icon" src="../../static/icons/delete.svg" alt="">
-                        <span class="tooltip__title">Удалить пользователя</span>
-                    </div>
+                    <div data-render="tooltip"></div>
                 </div>
             </div>
             <div class="menu__search">
                 <input type="text" id="search" name="search" placeholder="Поиск">
             </div>
             <div class="menu__list">
-                <div id="contacts"></div>
+                <div data-render="contacts"></div>
             </div>
         </div>
         <div class="chat__messages">
@@ -46,24 +35,13 @@
                 <p class="messages__header-name">Имя</p>
             </div>
             <div class="messages__wrapper">
-                <div id="messages"></div>
+                <div data-render="messages"></div>
             </div>
             <div class="messages__footer">
                 <div class="msg__include">
                     <img src="../../static/icons/includes.svg" alt="">
                     <div class="tooltip">
-                        <div class="tooltip__link">
-                            <img class="tooltip__icon" src="../../static/icons/photo.svg" alt="">
-                            <span class="tooltip__title"><a href="../profile/profile.html">Фото&nbsp;или&nbsp;Видео</a></span>
-                        </div>
-                        <div class="tooltip__link">
-                            <img class="tooltip__icon" src="../../static/icons/file.svg" alt="">
-                            <span class="tooltip__title">Файл</button></span>
-                        </div>
-                        <div class="tooltip__link">
-                            <img class="tooltip__icon" src="../../static/icons/location.svg" alt="">
-                            <span class="tooltip__title">Локация</span>
-                        </div>
+                        <div data-render="tooltip"></div>
                     </div>
                 </div>
                 <form class="messages__footer-msg" action="" method="post">

@@ -1,1 +1,3 @@
-<input type="submit" value="{{this.value}}" class="button {{this.className}}" {{this.disabled}}>
+{{#each data}}
+  <input type="submit" value="{{this.value}}" class="button {{this.className}}" {{this.disabled}}>
+{{/each}}

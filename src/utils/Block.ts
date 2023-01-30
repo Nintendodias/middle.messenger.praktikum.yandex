@@ -97,18 +97,54 @@ class Block {
     return this._element;
   }
 
+  protected render(): DocumentFragment {
+    return new DocumentFragment();
+  }
+
+  protected compile(template: (context: any) => string, data: any) {
+    const dataObj = { ...data };
+    const htmlString = template(dataObj);
+    const tmpl = document.createElement('template');
+    tmpl.innerHTML = htmlString;
+    this._element = tmpl.content;
+
+    return tmpl.content;
+  }
+
   private _render(): void {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
     if (this._element) {
-      this._element.innerHTML = block;
+      const children = Array.from(block.children);
+      this._element = this._addEvents(children);
     }
   }
 
-  public render(): any {}
+  _addEvents(children) {
+    children.forEach((el, index) => {
+      const { events } = this.props.data[index];
+
+      if (!events) {
+        return;
+      }
+
+      Object.entries(events).forEach(([event, listener]) => {
+        el.querySelector('input').addEventListener(event, listener);
+      });
+    });
+    
+    return children
+    // this.props.data.forEach((prop) => {
+    //   const { events } = prop as ;
+
+    //   if (!events) {
+    //     return;
+    //   }
+
+    //   Object.entries(events).forEach(([event, listener]) => {
+    //     el.addEventListener(event, listener);
+    //   });
+    // });
+  }
 
   getContent() {
     return this.element;
