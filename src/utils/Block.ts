@@ -1,6 +1,8 @@
 import EventBus from './EventBus';
 
-type TProps = Record<string, unknown>;
+type TProps = {
+  [data: string]: any;
+};
 
 class Block {
   private static EVENTS = {
@@ -10,7 +12,9 @@ class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  private _element: HTMLElement | null = null;
+  private _element: HTMLElement | null | Array<Element> = null;
+
+  private _children: Array<Element> | null = null;
 
   private _meta: {
     tagName: string;
@@ -101,49 +105,46 @@ class Block {
     return new DocumentFragment();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   protected compile(template: (context: any) => string, data: any) {
     const dataObj = { ...data };
     const htmlString = template(dataObj);
     const tmpl = document.createElement('template');
     tmpl.innerHTML = htmlString;
-    this._element = tmpl.content;
 
     return tmpl.content;
   }
 
   private _render(): void {
     const block = this.render();
+
     if (this._element) {
-      const children = Array.from(block.children);
-      this._element = this._addEvents(children);
+      this._children = Array.from(block.children);
+      this._addEvents();
+      this._element = this._children;
     }
   }
 
-  _addEvents(children) {
-    children.forEach((el, index) => {
-      const { events } = this.props.data[index];
+  _addEvents() {
+    if (this._children) {
+      this._children.forEach((el, index) => {
+        if (this.props) {
+          const { events }: Record<string, () => void> = (this.props as TProps).data[index];
 
-      if (!events) {
-        return;
-      }
+          if (!events) {
+            return;
+          }
 
-      Object.entries(events).forEach(([event, listener]) => {
-        el.querySelector('input').addEventListener(event, listener);
+          Object.entries(events).forEach(([event, listener]) => {
+            const target = el.children.length === 0 ? el : el.querySelector('input');
+
+            if (target) {
+              target.addEventListener(event, listener);
+            }
+          });
+        }
       });
-    });
-    
-    return children
-    // this.props.data.forEach((prop) => {
-    //   const { events } = prop as ;
-
-    //   if (!events) {
-    //     return;
-    //   }
-
-    //   Object.entries(events).forEach(([event, listener]) => {
-    //     el.addEventListener(event, listener);
-    //   });
-    // });
+    }
   }
 
   getContent() {
@@ -151,8 +152,6 @@ class Block {
   }
 
   private _makePropsProxy(props: TProps) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {

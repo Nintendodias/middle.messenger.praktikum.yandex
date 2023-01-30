@@ -1,8 +1,9 @@
 import './index.less';
 import Input from '../../components/Input/index';
 import Title20 from '../../components/Title20/index';
+import Button from '../../components/Button/index';
 import Render from '../../utils/Render';
-import { validate } from '../../utils/InputsValidation';
+import { onSubmit, validate } from '../../utils/InputsValidation';
 import Links from '../../components/Links/index';
 import file from '../signIn/signIn.html';
 
@@ -54,6 +55,23 @@ const LINKS = {
     },
   ],
 };
+
+const BUTTON = {
+  data: [
+    {
+      value: 'Войти',
+      className: 'form__button',
+      disabled: '',
+      events: {
+        click: onSubmit,
+      },
+    },
+  ],
+};
+
+const button = new Button(BUTTON);
+
+Render('[data-render="button"]', button);
 
 const menu = new Input(INPUTS);
 

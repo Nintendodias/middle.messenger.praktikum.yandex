@@ -1,13 +1,15 @@
-import "./index.less";
-import Block from "../../utils/Block";
-import templateFunction from "./ContactsItems.hbs";
+import './index.less';
+import Block from '../../utils/Block';
+import template from './ContactsItems.hbs';
+
+type TProps = Record<string, unknown>;
 
 export default class ContactsItems extends Block {
-  constructor(props) {
-    super("div", props);
+  constructor(props: TProps) {
+    super('div', props);
   }
 
   render() {
-    return templateFunction({ data: this.props.data });
+    return this.compile(template, { ...this.props });
   }
 }

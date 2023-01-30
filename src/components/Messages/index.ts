@@ -1,13 +1,15 @@
 import './index.less';
 import Block from '../../utils/Block';
-import templateFunction from './Messages.hbs';
+import template from './Messages.hbs';
+
+type TProps = Record<string, unknown>;
 
 export default class Messages extends Block {
-  constructor(props) {
+  constructor(props: TProps) {
     super('div', props);
   }
 
   render() {
-    return templateFunction({ data: this.props.data });
+    return this.compile(template, { ...this.props });
   }
 }

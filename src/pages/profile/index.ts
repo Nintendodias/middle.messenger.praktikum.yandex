@@ -2,7 +2,7 @@ import './index.less';
 import Title20 from '../../components/Title20/index';
 import Render from '../../utils/Render';
 import Input from '../../components/Input/index';
-import { validate } from '../../utils/InputsValidation';
+import { onSubmit, validate } from '../../utils/InputsValidation';
 import Button from '../../components/Button/index';
 import Links from '../../components/Links/index';
 import Avatar from '../../components/Avatar/index';
@@ -119,24 +119,36 @@ const INPUTS = [
         inputName: 'oldPassword',
         value: '',
         readonly: '',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
-        labelFor: 'newPassword',
+        labelFor: 'new_password',
         labelText: 'Новый пароль',
         inputType: 'password',
-        inputId: 'newPassword',
-        inputName: 'newPassword',
+        inputId: 'new_password',
+        inputName: 'new_password',
         value: '',
         readonly: '',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
       {
-        labelFor: 'repeatPassword',
+        labelFor: 'repeat_password',
         labelText: 'Повторите новый пароль',
         inputType: 'password',
-        inputId: 'repeatPassword',
-        inputName: 'repeatPassword',
+        inputId: 'repeat_password',
+        inputName: 'repeat_password',
         value: '',
         readonly: '',
+        events: {
+          blur: validate,
+          focus: validate,
+        },
       },
     ],
   },
@@ -149,6 +161,9 @@ const BUTTONS = [
         value: 'Сохранить',
         className: 'form__button --main',
         disabled: false,
+        events: {
+          click: onSubmit,
+        },
       },
     ],
   },
@@ -157,7 +172,10 @@ const BUTTONS = [
       {
         value: 'Сохранить',
         className: 'form__button',
-        disabled: 'disabled',
+        disabled: '',
+        events: {
+          click: onSubmit,
+        },
       },
     ],
   },
@@ -271,8 +289,6 @@ if (changeDataButton) {
       const button = document.querySelector('.--main');
 
       form.classList.add('_active');
-
-      console.log(inputsElements)
 
       inputsElements.forEach((input: HTMLInputElement) => {
         input.readOnly = false;
