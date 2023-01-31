@@ -4,14 +4,15 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     '@typescript-eslint/no-var-requires': 0,
-    "import/extensions": "off",
-    "no-param-reassign": 0,
-    "max-len": [2, 100],
-    "max-params": [2, 3],
-    "no-underscore-dangle": 'off' 
+    'import/extensions': 'off',
+    'no-param-reassign': 0,
+    'max-len': [2, 100],
+    'max-params': [2, 3],
+    'no-underscore-dangle': 'off',
+    indent: 'off',
   },
   root: true,
   parserOptions: {
-    project: './tsconfig.json'
-  }
+    project: './tsconfig.json',
+  },
 };

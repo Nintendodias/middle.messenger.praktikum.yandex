@@ -117,7 +117,7 @@ class Block {
 
   private _render(): void {
     const block = this.render();
-
+    this._removeEvents();
     if (this._element) {
       this._children = Array.from(block.children);
       this._addEvents();
@@ -129,7 +129,8 @@ class Block {
     if (this._children) {
       this._children.forEach((el, index) => {
         if (this.props) {
-          const { events }: Record<string, () => void> = (this.props as TProps).data[index];
+          const { events }: Record<string, () => void> = (this.props as TProps)
+            .data[index];
 
           if (!events) {
             return;
@@ -140,6 +141,29 @@ class Block {
 
             if (target) {
               target.addEventListener(event, listener);
+            }
+          });
+        }
+      });
+    }
+  }
+
+  _removeEvents() {
+    if (this._children) {
+      this._children.forEach((el, index) => {
+        if (this.props) {
+          const { events }: Record<string, () => void> = (this.props as TProps)
+            .data[index];
+
+          if (!events) {
+            return;
+          }
+
+          Object.entries(events).forEach(([event, listener]) => {
+            const target = el.children.length === 0 ? el : el.querySelector('input');
+
+            if (target) {
+              target.removeEventListener(event, listener);
             }
           });
         }

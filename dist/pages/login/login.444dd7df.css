@@ -49,6 +49,38 @@
   line-height: 13px;
 }
 
+.form__button {
+  position: relative;
+}
+
+.form__button--button {
+  width: 100%;
+  color: #fff;
+  cursor: pointer;
+  max-width: 280px;
+  background-color: #3369f3;
+  border: none;
+  border-radius: 8px;
+  margin: 0 auto;
+  padding: 12px;
+  display: block;
+}
+
+.form__button--button[disabled] {
+  cursor: default;
+  background-color: #999;
+}
+
+.form__button--error {
+  color: #ff2f2f;
+  pointer-events: none;
+  font-size: 7px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, calc(100% + 3px));
+}
+
 .s-title20 {
   text-align: center;
   margin-bottom: 20px;

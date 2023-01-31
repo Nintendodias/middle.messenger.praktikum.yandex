@@ -34,15 +34,13 @@ class Validations {
       },
       email: {
         pattern: /.+@[^@]+[a-z]+\.[^@]{2,}$/,
-        errorMsg:
-        `латиница, может включать цифры и спецсимволы вроде дефиса, 
+        errorMsg: `латиница, может включать цифры и спецсимволы вроде дефиса, 
         обязательно должна быть «собака» (@) и точка после неё, 
         но перед точкой обязательно должны быть буквы`,
       },
       first_name: {
         pattern: /^[А-ЯЁA-Z][А-ЯЁA-Zа-яёa-z-]+$/,
-        errorMsg:
-        `латиница или кириллица, первая буква должна быть заглавной, 
+        errorMsg: `латиница или кириллица, первая буква должна быть заглавной, 
         без пробелов и без цифр, нет спецсимволов 
         (допустим только дефис)`,
       },
@@ -91,14 +89,18 @@ const onSubmit = (event: any): void => {
   event.preventDefault();
 
   const formData: Record<string, string> = {};
-  const inputs = event.target.closest('form').querySelectorAll('[data-render="inputs"] input');
+  const inputs = event.target
+    .closest('form')
+    .querySelectorAll('[data-render="inputs"] input');
   const isError: boolean = Array.from(inputs).some((input: Element) => {
     const inputType = input as HTMLInputElement | null;
     const { value } = inputType!;
     const { name } = inputType!;
     return !Validations.INPUTS[name].pattern.test(value);
   });
-  const errorTarget = event.target.parentNode.querySelector('.form__button--error');
+  const errorTarget = event.target.parentNode.querySelector(
+    '.form__button--error',
+  );
 
   if (isError) {
     errorTarget.textContent = 'Поля заполнены неверно';
@@ -109,8 +111,12 @@ const onSubmit = (event: any): void => {
     formData[input.name] = input.value;
   });
 
-  if ((formData.password && (formData.password !== formData.repeat_password))
-  || (formData.new_password && (formData.new_password !== formData.repeat_password))) {
+  if (
+    formData.repeat_password
+    && ((formData.password && formData.password !== formData.repeat_password)
+      || (formData.new_password
+        && formData.new_password !== formData.repeat_password))
+  ) {
     errorTarget.textContent = 'Не совпадают пароли';
     return;
   }
