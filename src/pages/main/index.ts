@@ -3,6 +3,10 @@ import './index.less';
 import ContactsItems from '../../components/ContactsItems/index';
 import Messages from '../../components/Messages/index';
 import Tooltip from '../../components/Tooltip/index';
+import {
+  ButtonTooltip,
+  openTooltip,
+} from '../../components/ButtonTooltip/index';
 import Render from '../../utils/Render';
 import {
   i_profile,
@@ -12,6 +16,8 @@ import {
   i_file,
   i_location,
   i_avatar,
+  i_burger,
+  i_includes,
 } from '../../utils/StaticFileExport';
 
 const CONTACTS = {
@@ -354,28 +360,37 @@ tooltips.forEach((_tooltip, index) => {
   Render('[data-render="tooltip"]', tmplTooltip, index);
 });
 
-// Переписать как будет время
+const BUTTONTOOLTIP = [
+  {
+    data: [
+      {
+        className: 'burger__menu',
+        link: i_burger,
+        events: {
+          click: openTooltip,
+        },
+      },
+    ],
+  },
+  {
+    data: [
+      {
+        className: 'msg__icon',
+        link: i_includes,
+        events: {
+          click: openTooltip,
+        },
+      },
+    ],
+  },
+];
 
-const menu = document.querySelector('.burger__menu');
+const ButtonsTooltip = document.querySelectorAll(
+  '[data-render="button_tooltip"]',
+);
 
-if (menu) {
-  menu.addEventListener('click', () => {
-    const tooltip = document.querySelector('.chat__menu .tooltip');
+ButtonsTooltip.forEach((_button, index) => {
+  const tmplButtonsTooltip = new ButtonTooltip(BUTTONTOOLTIP[index]);
 
-    if (tooltip) {
-      tooltip.classList.toggle('_active');
-    }
-  });
-}
-
-const include = document.querySelector('.msg__include img');
-
-if (include) {
-  include.addEventListener('click', () => {
-    const tooltip = document.querySelector('.chat__messages .tooltip');
-
-    if (tooltip) {
-      tooltip.classList.toggle('_active');
-    }
-  });
-}
+  Render('[data-render="button_tooltip"]', tmplButtonsTooltip, index);
+});

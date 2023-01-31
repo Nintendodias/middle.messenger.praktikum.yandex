@@ -98,7 +98,7 @@ const onSubmit = (event: any): void => {
     const { name } = inputType!;
     return !Validations.INPUTS[name].pattern.test(value);
   });
-  const errorTarget = event.target.parentNode.querySelector(
+  const errorTarget: Element = event.target.parentNode.querySelector(
     '.form__button--error',
   );
 
@@ -112,10 +112,10 @@ const onSubmit = (event: any): void => {
   });
 
   if (
-    formData.repeat_password
-    && ((formData.password && formData.password !== formData.repeat_password)
-      || (formData.new_password
-        && formData.new_password !== formData.repeat_password))
+    formData.repeat_password &&
+    ((formData.password && formData.password !== formData.repeat_password) ||
+      (formData.new_password &&
+        formData.new_password !== formData.repeat_password))
   ) {
     errorTarget.textContent = 'Не совпадают пароли';
     return;

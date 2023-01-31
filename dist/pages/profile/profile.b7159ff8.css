@@ -20,24 +20,6 @@
   margin-bottom: 47px;
 }
 
-.btn {
-  color: #3369f3;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #eaeaea;
-  outline: none;
-  padding: 10px 0;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 13px;
-  text-decoration: none;
-  display: block;
-}
-
 .form .form__button.--main {
   display: none;
 }
@@ -150,6 +132,24 @@
   display: flex;
   position: absolute;
   inset: 0;
+}
+
+.btn {
+  color: #3369f3;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  outline: none;
+  padding: 10px 0;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13px;
+  text-decoration: none;
+  display: block;
 }
 
 /*# sourceMappingURL=profile.b7159ff8.css.map */

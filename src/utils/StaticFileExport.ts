@@ -5,8 +5,18 @@ import i_delete from '../static/icons/delete.svg';
 import i_photo from '../static/icons/photo.svg';
 import i_file from '../static/icons/file.svg';
 import i_location from '../static/icons/location.svg';
+import i_burger from '../static/icons/burger.svg';
+import i_includes from '../static/icons/includes.svg';
 import i_avatar from '../static/assets/avatar.png';
 
 export {
-  i_profile, i_add, i_delete, i_photo, i_file, i_location, i_avatar,
+  i_profile,
+  i_add,
+  i_delete,
+  i_photo,
+  i_file,
+  i_location,
+  i_avatar,
+  i_burger,
+  i_includes,
 };

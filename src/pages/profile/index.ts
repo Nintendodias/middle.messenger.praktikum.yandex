@@ -1,13 +1,40 @@
 import './index.less';
 import Title20 from '../../components/Title20/index';
 import Render from '../../utils/Render';
+import openModal from '../../utils/openModal';
 import Input from '../../components/Input/index';
 import { onSubmit, validate } from '../../utils/InputsValidation';
 import Button from '../../components/Button/index';
+import ButtonLink from '../../components/ButtonLink/index';
 import Links from '../../components/Links/index';
 import Avatar from '../../components/Avatar/index';
 import { i_avatar } from '../../utils/StaticFileExport';
 import file from '../main/main.html';
+
+const changeProfileData = () => {
+  const form = document.querySelector('[data-form="profile-data"]');
+
+  if (form) {
+    const inputsElements = form.querySelectorAll('.form__input');
+    const button = document.querySelector('.--main');
+
+    form.classList.add('_active');
+
+    inputsElements.forEach((input: HTMLInputElement) => {
+      input.readOnly = false;
+    });
+
+    if (button) {
+      button.addEventListener('click', () => {
+        form.classList.remove('_active');
+
+        inputsElements.forEach((input: HTMLInputElement) => {
+          input.readOnly = true;
+        });
+      });
+    }
+  }
+};
 
 const TITLES = [
   {
@@ -204,9 +231,35 @@ const AVATAR = {
   data: [
     {
       url: i_avatar,
+      events: {
+        click: openModal,
+      },
     },
   ],
 };
+
+const BTNLINKS = {
+  data: [
+    {
+      dataset: '',
+      text: 'Изменить данные',
+      events: {
+        click: changeProfileData,
+      },
+    },
+    {
+      dataset: '1',
+      text: 'Изменить пароль',
+      events: {
+        click: openModal,
+      },
+    },
+  ],
+};
+
+const buttonLink = new ButtonLink(BTNLINKS);
+
+Render('[data-render="btn-link"]', buttonLink);
 
 const avatar = new Avatar(AVATAR);
 
@@ -239,98 +292,3 @@ buttons.forEach((_button, index) => {
 const link = new Links(LINKS);
 
 Render('[data-render="links"]', link);
-
-// переписать как будет время
-
-const changeButtons = document.querySelectorAll('[data-button]');
-const changeDataButton = document.querySelector('.btn-link');
-
-function setChangePassword(modal: Element) {
-  // eslint-disable-next-line no-console
-  console.log(modal);
-  // eslint-disable-next-line no-console
-  console.log('Открытие окна для смены пароля');
-}
-
-function setInputTypeFile(modal: Element) {
-  const input = modal.querySelector('input');
-  const button = modal.querySelector('[data-render="form__button');
-
-  if (input && button) {
-    input.addEventListener('change', () => {
-      const LoadFile = this.files[0];
-
-      if (LoadFile) {
-        const span: HTMLElement | null = modal.querySelector(
-          '[data-render="input-file-text',
-        );
-
-        if (span) {
-          span.innerText = LoadFile.name;
-          button.removeAttribute('disabled');
-
-          button.addEventListener('click', (e) => {
-            // eslint-disable-next-line no-console
-            console.log('Фотография заменена');
-            e.preventDefault();
-          });
-        }
-      }
-    });
-  }
-}
-
-if (changeDataButton) {
-  changeDataButton.addEventListener('click', () => {
-    const form = document.querySelector('[data-form="profile-data"]');
-
-    if (form) {
-      const inputsElements = form.querySelectorAll('.form__input');
-      const button = document.querySelector('.--main');
-
-      form.classList.add('_active');
-
-      inputsElements.forEach((input: HTMLInputElement) => {
-        input.readOnly = false;
-      });
-
-      if (button) {
-        button.addEventListener('click', (e) => {
-          e.preventDefault();
-          form.classList.remove('_active');
-
-          inputsElements.forEach((input: HTMLInputElement) => {
-            input.readOnly = true;
-          });
-        });
-      }
-    }
-  });
-}
-
-changeButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const buttonDataset = button.getAttribute('data-button');
-    const modal = document.querySelector(`[data-modal="${buttonDataset}"]`);
-
-    if (buttonDataset && modal) {
-      const close = modal.querySelector('.modal_close');
-
-      if (close) {
-        modal.classList.add('_active');
-
-        close.addEventListener('click', () => {
-          modal.classList.remove('_active');
-        });
-
-        if (+buttonDataset === 1) {
-          setChangePassword(modal);
-        }
-
-        if (+buttonDataset === 2) {
-          setInputTypeFile(modal);
-        }
-      }
-    }
-  });
-});

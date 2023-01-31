@@ -137,7 +137,9 @@ class Block {
           }
 
           Object.entries(events).forEach(([event, listener]) => {
-            const target = el.children.length === 0 ? el : el.querySelector('input');
+            const target = el.querySelector('input')
+              ? el.querySelector('input')
+              : el;
 
             if (target) {
               target.addEventListener(event, listener);
@@ -160,7 +162,9 @@ class Block {
           }
 
           Object.entries(events).forEach(([event, listener]) => {
-            const target = el.children.length === 0 ? el : el.querySelector('input');
+            const target = el.querySelector('input')
+              ? el.querySelector('input')
+              : el;
 
             if (target) {
               target.removeEventListener(event, listener);

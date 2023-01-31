@@ -10,6 +10,19 @@ module.exports = {
     'max-params': [2, 3],
     'no-underscore-dangle': 'off',
     indent: 'off',
+    '@typescript-eslint/indent': 'warn',
+    'comma-dangle': 'off',
+    '@typescript-eslint/comma-dangle': 'warn',
+    'operator-linebreak': [
+      'error',
+      'after',
+      {
+        overrides: {
+          ':': 'before',
+          '?': 'before',
+        },
+      },
+    ],
   },
   root: true,
   parserOptions: {
