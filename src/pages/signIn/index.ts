@@ -5,7 +5,7 @@ import Button from '../../components/Button/index';
 import Render from '../../utils/Render';
 import { onSubmit, validate } from '../../utils/InputsValidation';
 import Links from '../../components/Links/index';
-import file from '../login/login.html';
+import file from '../LoginPage/login.html';
 
 const INPUTS = {
   data: [

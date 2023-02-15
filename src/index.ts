@@ -1,8 +1,6 @@
 import Router from './utils/Router';
-import LoginPage from './pages/login';
+import LoginPage from './pages/LoginPage';
 
 const router = new Router('#root');
 
-console.log(router);
-
-router.use('/', LoginPage, {});
+router.use('/', LoginPage, { data: [{}] }).start();

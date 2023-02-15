@@ -1,6 +1,6 @@
 /* eslint-disable max-params */
 import Block from './Block';
-import render from './Render';
+import Render from './Render';
 
 function isEqual(lhs: any, rhs: any) {
   return lhs === rhs;
@@ -63,12 +63,12 @@ export class Route {
 
   render() {
     if (!this._block) {
-      this._block = new this._blockClass();
-      render(this._props.rootQuery, this._block);
+      this._block = new this._blockClass({ data: [{}] });
+      Render(this._props.rootQuery, this._block);
       return;
     }
 
-    render(this._props.rootQuery, this._block);
+    Render(this._props.rootQuery, this._block);
   }
 }
 
