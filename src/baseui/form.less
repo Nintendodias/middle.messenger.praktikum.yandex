@@ -1,19 +1,23 @@
-@import "./colors.less";
+@import url('./colors.less');
 
 .form-container {
-    max-width: 340px;
-    width: 100%;
-    background: @color-white;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-    border-radius: 12px;
-    padding: 50px 30px 30px;
-    
-    .form {
-        margin-bottom: 14px;
+  max-width: 340px;
+  width: 100%;
+  background: @color-white;
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+  border-radius: 12px;
+  padding: 50px 30px 30px;
 
-        &>div {
-            min-height: 201px;
-            margin-bottom: 47px;
-        }
+  .form {
+    margin-bottom: 14px;
+
+    & > div {
+      margin-bottom: 20px;
     }
+
+    & > div:nth-child(2) {
+      min-height: 201px;
+      margin-bottom: 47px;
+    }
+  }
 }

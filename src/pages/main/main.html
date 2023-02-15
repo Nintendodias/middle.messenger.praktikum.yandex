@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script type="module" src="./index.ts"></script>
+    <link rel="stylesheet" href="../../global.less" />
+    <title>Чат</title>
+</head>
+
+<body>
+    <main class="chat">
+        <div class="chat__menu">
+            <div class="menu__header">
+                <div data-render="button_tooltip"></div>
+                <div class="tooltip">
+                    <div data-render="tooltip"></div>
+                </div>
+            </div>
+            <div class="menu__search">
+                <input type="text" id="search" name="search" placeholder="Поиск">
+            </div>
+            <div class="menu__list">
+                <div data-render="contacts"></div>
+            </div>
+        </div>
+        <div class="chat__messages">
+            <div class="messages__header">
+                <img class="messages__header-avatar" src="../../static/assets/avatar.png" alt="" width="34">
+                <p class="messages__header-name">Имя</p>
+            </div>
+            <div class="messages__wrapper">
+                <div data-render="messages"></div>
+            </div>
+            <div class="messages__footer">
+                <div class="msg__include">
+                    <div data-render="button_tooltip"></div>
+                    <div class="tooltip">
+                        <div data-render="tooltip"></div>
+                    </div>
+                </div>
+                <form class="messages__footer-msg" action="" method="post">
+                    <textarea rows="1" cols="15" name="message" class="msg__textarea"
+                        placeholder="Сообщение"></textarea>
+                    <img src="../../static/icons/arrow.svg" alt="" class="msg__submit">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

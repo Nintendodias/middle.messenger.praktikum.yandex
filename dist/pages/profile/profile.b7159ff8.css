@@ -12,33 +12,12 @@
 }
 
 .form-container .form > div {
+  margin-bottom: 20px;
+}
+
+.form-container .form > div:nth-child(2) {
   min-height: 201px;
   margin-bottom: 47px;
-}
-
-.btn {
-  color: #3369f3;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  background: none;
-  border: none;
-  outline: none;
-  padding: 10px 0;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 13px;
-  text-decoration: none;
-  display: block;
-}
-
-.btn.btn-return {
-  color: #ff2f2f;
-}
-
-.btn + .btn {
-  border-top: 1px solid #eaeaea;
 }
 
 .form .form__button.--main {
@@ -153,6 +132,24 @@
   display: flex;
   position: absolute;
   inset: 0;
+}
+
+.btn {
+  color: #3369f3;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eaeaea;
+  outline: none;
+  padding: 10px 0;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 13px;
+  text-decoration: none;
+  display: block;
 }
 
 /*# sourceMappingURL=profile.b7159ff8.css.map */
