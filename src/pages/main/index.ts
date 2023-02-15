@@ -386,7 +386,7 @@ const BUTTONTOOLTIP = [
 ];
 
 const ButtonsTooltip = document.querySelectorAll(
-  '[data-render="button_tooltip"]',
+  '[data-render="button_tooltip"]'
 );
 
 ButtonsTooltip.forEach((_button, index) => {

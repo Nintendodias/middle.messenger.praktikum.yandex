@@ -94,6 +94,8 @@ class Block {
       return;
     }
 
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, this.props, nextProps);
+
     Object.assign(this.props, nextProps);
   };
 
@@ -175,10 +177,6 @@ class Block {
     }
   }
 
-  getContent() {
-    return this.element;
-  }
-
   private _makePropsProxy(props: TProps) {
     const self = this;
 
@@ -204,15 +202,13 @@ class Block {
     return document.createElement(tagName);
   }
 
-  // public show() {
-  //   if (this.getContent() !== null) {
-  //     this.getContent().style.display = 'block';
-  //   }
-  // }
+  getContent() {
+    return this.element;
+  }
 
-  // public hide() {
-  //   this.getContent().style.display = 'none';
-  // }
+  leave() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+  }
 }
 
 export default Block;

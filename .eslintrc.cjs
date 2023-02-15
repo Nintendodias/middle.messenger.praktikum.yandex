@@ -23,6 +23,7 @@ module.exports = {
         },
       },
     ],
+    'max-classes-per-file': ['error', 5],
   },
   root: true,
   parserOptions: {

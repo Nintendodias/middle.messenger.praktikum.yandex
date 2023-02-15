@@ -1,7 +1,7 @@
 export default function render(
   query: string,
   block: any,
-  index: number = 0,
+  index: number = 0
 ): object {
   const root = document.querySelectorAll(query);
 
