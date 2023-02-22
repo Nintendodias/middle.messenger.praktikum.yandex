@@ -6,6 +6,7 @@ export default function render(
   const root = document.querySelectorAll(query);
 
   block._element.forEach((el) => {
+    root[index].innerHTML = '';
     root[index].appendChild(el);
 
     return root;

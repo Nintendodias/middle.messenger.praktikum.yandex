@@ -1,10 +1,10 @@
 import './index.less';
 import Block from '../../utils/Block';
-import template from './Title40.hbs';
+import template from './Image.hbs';
 
 type TProps = Record<string, unknown>;
 
-export default class Title40 extends Block {
+export default class Image extends Block {
   constructor(props: TProps) {
     super('div', props);
   }

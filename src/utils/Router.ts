@@ -64,8 +64,6 @@ export class Route {
   render() {
     if (!this._block) {
       this._block = new this._blockClass(this._componentProps);
-      console.log('render');
-      console.log(this._block);
       Render(this._props.rootQuery, this._block);
       return;
     }
@@ -110,9 +108,6 @@ export default class Router {
       props
     );
 
-    console.log('use');
-    console.log(route);
-
     this.routes.push(route);
 
     return this;
@@ -132,8 +127,6 @@ export default class Router {
       return;
     }
 
-    console.log('_onRoute');
-    console.log(route);
     this._currentRoute?.leave();
     this._currentRoute = route;
     route.render();

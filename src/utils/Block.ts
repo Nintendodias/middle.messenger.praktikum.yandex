@@ -19,6 +19,7 @@ class Block {
   private _meta: {
     tagName: string;
     props: object;
+    childrenComponents: Array<any>;
   };
 
   private eventBus: () => EventBus;
@@ -32,11 +33,16 @@ class Block {
    * @returns {void}
    */
 
-  constructor(tagName: string = 'div', props: TProps = {}) {
+  constructor(
+    tagName: string = 'div',
+    props: TProps = {},
+    childrenComponents: Array<any> = []
+  ) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
       props,
+      childrenComponents,
     };
 
     this.eventBus = () => eventBus;
@@ -113,17 +119,42 @@ class Block {
     const htmlString = template(dataObj);
     const tmpl = document.createElement('template');
     tmpl.innerHTML = htmlString;
-
     return tmpl.content;
   }
 
   private _render(): void {
     const block = this.render();
     this._removeEvents();
+
     if (this._element) {
       this._children = Array.from(block.children);
       this._addEvents();
       this._element = this._children;
+      this._addChildrenComponents();
+    }
+  }
+
+  private _addChildrenComponents(): void {
+    if (this._children) {
+      const { childrenComponents } = this._meta;
+
+      if (childrenComponents && childrenComponents.length > 0) {
+        childrenComponents.forEach((component) => {
+          if (this._element && this._element[0]) {
+            const qSel = this._element[0].querySelectorAll(
+              component.props.target
+            );
+
+            if (qSel.length > 0) {
+              const curentElements = component.element;
+
+              curentElements.forEach((el) => {
+                qSel[0].appendChild(el);
+              });
+            }
+          }
+        });
+      }
     }
   }
 

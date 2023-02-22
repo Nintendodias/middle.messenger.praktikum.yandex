@@ -1,0 +1,45 @@
+{{#each data}}
+  <main class='chat'>
+    <div class='chat__menu'>
+      <div class='menu__header'>
+        <div data-render='button_tooltip0'></div>
+        <div class='tooltip'>
+          <div data-render='tooltip0'></div>
+        </div>
+      </div>
+      <div class='menu__search'>
+        <input type='text' id='search' name='search' placeholder='Поиск' />
+      </div>
+      <div class='menu__list'>
+        <div data-render='contacts'></div>
+      </div>
+    </div>
+    <div class='chat__messages'>
+      <div class='messages__header'>
+        <div class='messages__header-avatar' data-render='image0'></div>
+        <p class='messages__header-name'>Имя</p>
+      </div>
+      <div class='messages__wrapper'>
+        <div data-render='messages'></div>
+      </div>
+      <div class='messages__footer'>
+        <div class='msg__include'>
+          <div data-render='button_tooltip1'></div>
+          <div class='tooltip'>
+            <div data-render='tooltip1'></div>
+          </div>
+        </div>
+        <form class='messages__footer-msg' action='' method='post'>
+          <textarea
+            rows='1'
+            cols='15'
+            name='message'
+            class='msg__textarea'
+            placeholder='Сообщение'
+          ></textarea>
+          <div class='messages__header-avatar' data-render='image1'></div>
+        </form>
+      </div>
+    </div>
+  </main>
+{{/each}}

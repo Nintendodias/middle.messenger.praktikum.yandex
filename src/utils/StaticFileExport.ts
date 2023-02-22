@@ -8,6 +8,7 @@ import i_location from '../static/icons/location.svg';
 import i_burger from '../static/icons/burger.svg';
 import i_includes from '../static/icons/includes.svg';
 import i_avatar from '../static/assets/avatar.png';
+import i_arrow from '../static/icons/arrow.svg';
 
 export {
   i_profile,
@@ -19,4 +20,5 @@ export {
   i_avatar,
   i_burger,
   i_includes,
+  i_arrow,
 };
