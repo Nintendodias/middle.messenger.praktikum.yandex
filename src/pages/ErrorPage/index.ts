@@ -28,7 +28,6 @@ export default class ErrorPage extends Block {
   }
 
   render() {
-    console.log({ ...this.props }.data[0].code);
     switch ({ ...this.props }.data[0].code) {
       case 404: {
         return this.compile(ErrorPage400TMPL, { ...this.props });

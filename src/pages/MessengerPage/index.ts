@@ -23,10 +23,21 @@ import {
   i_includes,
   i_arrow,
 } from '../../utils/StaticFileExport';
-
-console.log(i_avatar);
+import { chats } from '../../utils/API';
 
 type TProps = Record<string, unknown>;
+
+function findChats() {
+  chats()
+    .then((value) => {
+      console.log(value);
+      return value;
+    })
+    .catch((error) => {
+      console.log(error);
+      return [];
+    });
+}
 
 export default class MessengerPage extends Block {
   constructor(props: TProps) {
@@ -128,197 +139,7 @@ export default class MessengerPage extends Block {
       }),
       new ContactsItems({
         target: '[data-render="contacts"]',
-        data: [
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-          {
-            avatar: i_avatar,
-            name: 'Имя',
-            lastMsg: 'Последнее сообщение',
-            date: '00.00',
-            unreadMsg: 0,
-          },
-        ],
+        data: findChats(),
       }),
       new Tooltip({
         target: '[data-render="tooltip0"]',
@@ -334,11 +155,11 @@ export default class MessengerPage extends Block {
           },
           {
             icon: i_add,
-            text: 'Добавить пользователя',
+            text: 'Добавить чат',
           },
           {
             icon: i_delete,
-            text: 'Удалить пользователя',
+            text: 'Удалить чат',
           },
         ],
       }),

@@ -1,8 +1,6 @@
 import './index.less';
 import Block from '../../utils/Block';
 import template from './ProfilePage.hbs';
-import Router from '../../utils/Router';
-import './index.less';
 import Title20 from '../../components/Title20/index';
 import openModal from '../../utils/openModal';
 import changeProfileData from '../../utils/changeProfileData';
@@ -13,8 +11,35 @@ import ButtonLink from '../../components/ButtonLink/index';
 import Links from '../../components/Links/index';
 import Avatar from '../../components/Avatar/index';
 import { i_avatar } from '../../utils/StaticFileExport';
+import { user, logout, sendAvatar } from '../../utils/API';
+import Router from '../../utils/Router';
 
 type TProps = Record<string, unknown>;
+
+function changeAvatar(event: any): void {
+  event.preventDefault();
+
+  const input = event.target.closest('form').querySelector('input');
+
+  if (input) {
+    const file = input.files[0];
+
+    if (file) {
+      const fd = new FormData();
+
+      fd.append('avatar', file);
+
+      sendAvatar(fd).then((value) => {
+        const data = JSON.parse(value);
+        const place = document.body.querySelector('.profile_avatar img');
+
+        if (place) {
+          place.src = `https://ya-praktikum.tech/api/v2/resources${data.avatar}`;
+        }
+      });
+    }
+  }
+}
 
 export default class ProfilePage extends Block {
   constructor(props: TProps) {
@@ -44,7 +69,7 @@ export default class ProfilePage extends Block {
             inputType: 'email',
             inputId: 'email',
             inputName: 'email',
-            value: 'pochta@yandex.ru',
+            value: '',
             readonly: 'readonly',
             events: {
               blur: validate,
@@ -57,7 +82,7 @@ export default class ProfilePage extends Block {
             inputType: 'text',
             inputId: 'login',
             inputName: 'login',
-            value: 'ivanivanov',
+            value: '',
             readonly: 'readonly',
             events: {
               blur: validate,
@@ -70,7 +95,7 @@ export default class ProfilePage extends Block {
             inputType: 'text',
             inputId: 'first_name',
             inputName: 'first_name',
-            value: 'Иван',
+            value: '',
             readonly: 'readonly',
             events: {
               blur: validate,
@@ -83,7 +108,7 @@ export default class ProfilePage extends Block {
             inputType: 'text',
             inputId: 'second_name',
             inputName: 'second_name',
-            value: 'Иванов',
+            value: '',
             readonly: 'readonly',
             events: {
               blur: validate,
@@ -96,7 +121,7 @@ export default class ProfilePage extends Block {
             inputType: 'text',
             inputId: 'display_name',
             inputName: 'display_name',
-            value: 'Иван',
+            value: '',
             readonly: 'readonly',
             events: {
               blur: validate,
@@ -109,7 +134,7 @@ export default class ProfilePage extends Block {
             inputType: 'tel',
             inputId: 'phone',
             inputName: 'phone',
-            value: '+79099673030',
+            value: '',
             readonly: 'readonly',
             events: {
               blur: validate,
@@ -135,11 +160,11 @@ export default class ProfilePage extends Block {
             },
           },
           {
-            labelFor: 'new_password',
+            labelFor: 'newPassword',
             labelText: 'Новый пароль',
             inputType: 'password',
-            inputId: 'new_password',
-            inputName: 'new_password',
+            inputId: 'newPassword',
+            inputName: 'newPassword',
             value: '',
             readonly: '',
             events: {
@@ -179,7 +204,7 @@ export default class ProfilePage extends Block {
         target: '[data-render="button_wrapper1"]',
         data: [
           {
-            value: 'Сохранить',
+            value: 'Поменять',
             className: 'form__button',
             disabled: '',
             events: {
@@ -194,7 +219,10 @@ export default class ProfilePage extends Block {
           {
             value: 'Поменять',
             className: 'form__button',
-            disabled: 'disabled',
+            disabled: '',
+            events: {
+              click: changeAvatar,
+            },
           },
         ],
       }),
@@ -204,9 +232,13 @@ export default class ProfilePage extends Block {
           {
             className: '--red',
             text: 'Выйти',
-            // events: {
-            //   click: logOut,
-            // },
+            events: {
+              click: () => {
+                logout().then((_value) => {
+                  Router.getInstance().go('/');
+                });
+              },
+            },
           },
         ],
       }),
@@ -241,6 +273,31 @@ export default class ProfilePage extends Block {
         ],
       }),
     ]);
+  }
+
+  componentDidMount() {
+    user().then((value) => {
+      const data = JSON.parse(value);
+      const inputs = this.element[0].querySelectorAll('.form__input[readonly]');
+
+      inputs.forEach((input) => {
+        const { id } = input;
+
+        if (data[id]) {
+          input.setAttribute('value', data[id]);
+        }
+
+        if (id === 'display_name' && !data.display_name) {
+          input.setAttribute('value', data.login);
+        }
+      });
+
+      const place = this.element[0].querySelector('.profile_avatar img');
+
+      if (place && data.avatar) {
+        place.src = `https://ya-praktikum.tech/api/v2/resources${data.avatar}`;
+      }
+    });
   }
 
   render() {

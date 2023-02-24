@@ -67,11 +67,12 @@ class Block {
   public init(): void {
     this._createResources();
 
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   private _componentDidMount(): void {
     this.componentDidMount();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   public componentDidMount() {}

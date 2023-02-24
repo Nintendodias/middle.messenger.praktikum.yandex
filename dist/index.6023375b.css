@@ -137,7 +137,7 @@ img {
 .form__button--error {
   color: #ff2f2f;
   pointer-events: none;
-  font-size: 7px;
+  font-size: 9px;
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -146,6 +146,7 @@ img {
 
 .text-link {
   color: #3369f3;
+  cursor: pointer;
   margin: 0 auto;
   font-size: 11px;
   font-style: normal;
@@ -247,54 +248,19 @@ img {
   pointer-events: none;
 }
 
-.input-file {
-  margin-bottom: 30px;
-  display: inline-block;
-  position: relative;
+input[type="file"] {
+  margin-bottom: 20px;
 }
 
-.input-file-text {
-  text-align: left;
-  height: 40px;
-  float: left;
-  box-sizing: border-box;
-  width: 200px;
-  border: 1px solid #ddd;
-  border-radius: 6px 0 0 6px;
-  padding: 0 10px;
-  font-size: 11px;
-  line-height: 40px;
-  display: block;
-}
-
-.input-file-btn {
-  cursor: pointer;
-  vertical-align: middle;
+input[type="file"]::file-selector-button {
   color: #fff;
-  text-align: center;
-  height: 40px;
-  box-sizing: border-box;
-  background-color: #ff2f2f;
+  cursor: pointer;
+  background-color: #1e1e1e;
   border: none;
-  border-radius: 0 4px 4px 0;
-  outline: none;
-  margin: 0;
-  padding: 10px 20px;
-  font-size: 14px;
-  line-height: 22px;
-  text-decoration: none;
-  transition: background-color .2s;
-  display: inline-block;
-  position: relative;
-}
-
-.input-file input[type="file"] {
-  z-index: -1;
-  opacity: 0;
-  width: 0;
-  height: 0;
-  display: block;
-  position: absolute;
+  border-radius: 3px;
+  margin-right: 20px;
+  padding: .5em;
+  font-weight: 500;
 }
 
 .btn {
@@ -315,6 +281,10 @@ img {
   display: block;
 }
 
+.btn:first-child {
+  margin-top: 65px;
+}
+
 .profile_avatar {
   cursor: pointer;
   width: 130px;
@@ -323,6 +293,12 @@ img {
   margin: 0 auto 21px;
   position: relative;
   overflow: hidden;
+}
+
+.profile_avatar img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .profile_avatar:hover:after {
@@ -496,54 +472,6 @@ img {
   left: 10px;
 }
 
-.message__item {
-  text-align: left;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.message__item .message__item-inner {
-  max-width: 45%;
-  width: auto;
-  background: #eaeaea;
-  border-radius: 2px 20px 20px 2px;
-  padding: 11px;
-  display: inline-block;
-}
-
-.message__item .message__item-inner .message__item-text {
-  margin-bottom: 5px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 15px;
-}
-
-.message__item .message__item-inner .message__item-date {
-  text-align: right;
-  color: #999;
-  font-size: 9px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 9px;
-}
-
-.message__item.--self {
-  text-align: right;
-}
-
-.message__item.--self .message__item-inner {
-  border-radius: 20px 2px 2px 20px;
-}
-
-.message__item:last-child .message__item-inner {
-  background: #e4edfd;
-}
-
-.message__item:last-child .message__item-inner .message__item-date {
-  color: #3369f3;
-}
-
 .menu__list-item {
   height: 72px;
   cursor: pointer;
@@ -611,6 +539,54 @@ img {
   right: 0;
 }
 
+.message__item {
+  text-align: left;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.message__item .message__item-inner {
+  max-width: 45%;
+  width: auto;
+  background: #eaeaea;
+  border-radius: 2px 20px 20px 2px;
+  padding: 11px;
+  display: inline-block;
+}
+
+.message__item .message__item-inner .message__item-text {
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.message__item .message__item-inner .message__item-date {
+  text-align: right;
+  color: #999;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 9px;
+}
+
+.message__item.--self {
+  text-align: right;
+}
+
+.message__item.--self .message__item-inner {
+  border-radius: 20px 2px 2px 20px;
+}
+
+.message__item:last-child .message__item-inner {
+  background: #e4edfd;
+}
+
+.message__item:last-child .message__item-inner .message__item-date {
+  color: #3369f3;
+}
+
 .tooltip {
   z-index: 100;
   background: #fff;
@@ -652,10 +628,10 @@ img {
   margin-top: 16px;
 }
 
-
-
 .--cursor {
   cursor: pointer;
 }
+
+
 
 /*# sourceMappingURL=index.6023375b.css.map */

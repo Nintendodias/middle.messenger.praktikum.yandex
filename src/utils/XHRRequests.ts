@@ -15,28 +15,20 @@ type Topt = {
 
 type HTTPMethod = (url: string, opt?: Topt) => Promise<unknown>;
 
-function queryStringify(data: object) {
-  if (typeof data !== 'object') {
-    throw new Error('Пришедшие данные должны быть объектом');
-  }
+const baseUrl = 'https://ya-praktikum.tech/api/v2/';
 
-  const keys = Object.keys(data);
-  return keys.reduce(
-    (result, key, index) => `${result}${key}=${data[key as keyof object]}${
-      index < keys.length - 1 ? '&' : ''
-    }`,
-    '?',
-  );
-}
+class HTTPTransport {
+  get: HTTPMethod = (url, opt = {}) =>
+    this.request(url, { ...opt, method: METHODS.GET });
 
-export class HTTPTransport {
-  get: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.GET });
+  post: HTTPMethod = (url, opt = {}) =>
+    this.request(url, { ...opt, method: METHODS.POST });
 
-  post: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.POST });
+  put: HTTPMethod = (url, opt = {}) =>
+    this.request(url, { ...opt, method: METHODS.PUT });
 
-  put: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.PUT });
-
-  delete: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.DELETE });
+  delete: HTTPMethod = (url, opt = {}) =>
+    this.request(url, { ...opt, method: METHODS.DELETE });
 
   // Он ругается на то, что в этом методе не используется контекст класса.
   // Я считаю, в данном случае имеет смысл ESList проигнорировать,
@@ -55,15 +47,26 @@ export class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
-      xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
+      if (isGet) {
+        if (data) {
+          url = `${url}?${Object.entries(data)
+            .map(
+              ([key, value]: [key: string, value: any]): string =>
+                `${key}=${value}`
+            )
+            .join('&')}`;
+        }
+      }
 
-      Object.entries(headers).forEach(([key, value]) => {
-        if (!key || !value) return;
-        xhr.setRequestHeader(key, value);
-      });
+      xhr.open(method, baseUrl + url);
+      xhr.withCredentials = true;
 
       xhr.onload = () => {
-        resolve(xhr);
+        if (xhr.status === 200) {
+          resolve(xhr.response);
+        } else {
+          reject(JSON.parse(xhr.response));
+        }
       };
 
       xhr.timeout = opt.timeout || 5000;
@@ -74,11 +77,21 @@ export class HTTPTransport {
 
       xhr.ontimeout = reject;
 
+      if (headers !== null) {
+        xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+      }
+
       if (isGet || !data) {
         xhr.send();
-      } else {
+      } else if (headers !== null) {
         xhr.send(JSON.stringify(data));
+      } else {
+        xhr.send(data);
       }
     });
   };
 }
+
+const http = new HTTPTransport();
+
+export default http;
