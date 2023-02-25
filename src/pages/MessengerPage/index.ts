@@ -24,48 +24,48 @@ import {
   i_arrow,
 } from '../../utils/StaticFileExport';
 import { chats } from '../../utils/API';
+import ModalAddChat from '../../components/Modals/ModalAddChat';
+import openModal from '../../utils/openModal';
 
 type TProps = Record<string, unknown>;
 
 function findChats() {
   chats()
     .then((value) => {
-      console.log(value);
-      return value;
+      const chs = JSON.parse(value);
+
+      const result = chs.map((chat) => {
+        const avatar = chat.avatar ? chat.avatar : i_avatar;
+        const lastMsg = chat.last_message ? chat.last_message.content : '';
+        const date = chat.last_message ? chat.last_message.time : '';
+
+        // let date = new Date( Date.parse("2020-01-02T14:22:22.000Z") )
+
+        return {
+          name: chat.title,
+          avatar,
+          date,
+          unreadMsg: chat.unread_count,
+          lastMsg,
+          isUnreadCount: chat.unread_count === 0 ? 'none' : 'block',
+        };
+      });
+
+      console.log(result);
+      return result;
     })
     .catch((error) => {
       console.log(error);
-      return [];
     });
-
-  return [
-    {
-      avatar: i_avatar,
-      name: 'Имя',
-      lastMsg: 'Последнее сообщение',
-      date: '00.00',
-      unreadMsg: 0,
-    },
-    {
-      avatar: i_avatar,
-      name: 'Имя',
-      lastMsg: 'Последнее сообщение',
-      date: '00.00',
-      unreadMsg: 0,
-    },
-    {
-      avatar: i_avatar,
-      name: 'Имя',
-      lastMsg: 'Последнее сообщение',
-      date: '00.00',
-      unreadMsg: 0,
-    },
-  ];
 }
 
 export default class MessengerPage extends Block {
   constructor(props: TProps) {
     super('div', props, [
+      new ModalAddChat({
+        target: '[ data-render="modal0"]',
+        data: [{}],
+      }),
       new Messages({
         target: '[data-render="messages"]',
         data: [
@@ -180,6 +180,9 @@ export default class MessengerPage extends Block {
           {
             icon: i_add,
             text: 'Добавить чат',
+            events: {
+              click: () => openModal('modal0'),
+            },
           },
           {
             icon: i_delete,

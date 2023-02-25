@@ -11,52 +11,29 @@ import ButtonLink from '../../components/ButtonLink/index';
 import Links from '../../components/Links/index';
 import Avatar from '../../components/Avatar/index';
 import { i_avatar } from '../../utils/StaticFileExport';
-import { user, logout, sendAvatar } from '../../utils/API';
+import { user, logout } from '../../utils/API';
 import Router from '../../utils/Router';
+import ModalChangePassword from '../../components/Modals/ModalChangePassword';
+import ModalChangeAvatar from '../../components/Modals/ModalChangeAvatar';
 
 type TProps = Record<string, unknown>;
-
-function changeAvatar(event: any): void {
-  event.preventDefault();
-
-  const input = event.target.closest('form').querySelector('input');
-
-  if (input) {
-    const file = input.files[0];
-
-    if (file) {
-      const fd = new FormData();
-
-      fd.append('avatar', file);
-
-      sendAvatar(fd).then((value) => {
-        const data = JSON.parse(value);
-        const place = document.body.querySelector('.profile_avatar img');
-
-        if (place) {
-          place.src = `https://ya-praktikum.tech/api/v2/resources${data.avatar}`;
-        }
-      });
-    }
-  }
-}
 
 export default class ProfilePage extends Block {
   constructor(props: TProps) {
     super('div', props, [
+      new ModalChangePassword({
+        target: '[data-render="modal0"]',
+        data: [{}],
+      }),
+      new ModalChangeAvatar({
+        target: '[data-render="modal1"]',
+        data: [{}],
+      }),
       new Title20({
         target: '[data-render="title20_0"]',
         data: [
           {
             text: 'Имя пользователя',
-          },
-        ],
-      }),
-      new Title20({
-        target: '[data-render="title20_1"]',
-        data: [
-          {
-            text: 'Загрузите файл',
           },
         ],
       }),
@@ -143,50 +120,6 @@ export default class ProfilePage extends Block {
           },
         ],
       }),
-      new Input({
-        target: '[data-render="inputs1"]',
-        data: [
-          {
-            labelFor: 'oldPassword',
-            labelText: 'Старый пароль',
-            inputType: 'password',
-            inputId: 'oldPassword',
-            inputName: 'oldPassword',
-            value: '',
-            readonly: '',
-            events: {
-              blur: validate,
-              focus: validate,
-            },
-          },
-          {
-            labelFor: 'newPassword',
-            labelText: 'Новый пароль',
-            inputType: 'password',
-            inputId: 'newPassword',
-            inputName: 'newPassword',
-            value: '',
-            readonly: '',
-            events: {
-              blur: validate,
-              focus: validate,
-            },
-          },
-          {
-            labelFor: 'repeat_password',
-            labelText: 'Повторите новый пароль',
-            inputType: 'password',
-            inputId: 'repeat_password',
-            inputName: 'repeat_password',
-            value: '',
-            readonly: '',
-            events: {
-              blur: validate,
-              focus: validate,
-            },
-          },
-        ],
-      }),
       new Button({
         target: '[data-render="button_wrapper0"]',
         data: [
@@ -196,32 +129,6 @@ export default class ProfilePage extends Block {
             disabled: false,
             events: {
               click: onSubmit,
-            },
-          },
-        ],
-      }),
-      new Button({
-        target: '[data-render="button_wrapper1"]',
-        data: [
-          {
-            value: 'Поменять',
-            className: 'form__button',
-            disabled: '',
-            events: {
-              click: onSubmit,
-            },
-          },
-        ],
-      }),
-      new Button({
-        target: '[data-render="button_wrapper2"]',
-        data: [
-          {
-            value: 'Поменять',
-            className: 'form__button',
-            disabled: '',
-            events: {
-              click: changeAvatar,
             },
           },
         ],
@@ -248,7 +155,7 @@ export default class ProfilePage extends Block {
           {
             url: i_avatar,
             events: {
-              click: openModal,
+              click: () => openModal('modal1'),
             },
           },
         ],
@@ -264,10 +171,9 @@ export default class ProfilePage extends Block {
             },
           },
           {
-            dataset: '1',
             text: 'Изменить пароль',
             events: {
-              click: openModal,
+              click: () => openModal('modal0'),
             },
           },
         ],

@@ -1,0 +1,37 @@
+@import url('../../baseui/colors.less');
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #00000080;
+  align-items: center;
+  justify-content: center;
+
+  & > div {
+    background: @color-white;
+    padding: 40px 30px;
+    box-shadow: 0 0 6px rgb(0 0 0 / 14%);
+    border-radius: 12px;
+  }
+
+  &._active {
+    display: flex;
+  }
+
+  .modal_close {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+
+    path {
+      pointer-events: none;
+    }
+  }
+}

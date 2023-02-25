@@ -40,5 +40,11 @@ export function sendNewPassword(data) {
 }
 
 export function chats() {
-  return http.get('/chats');
+  return http.get('chats');
+}
+
+export function createChat(data) {
+  return http.post('chats', {
+    data: data,
+  });
 }

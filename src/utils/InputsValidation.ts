@@ -1,5 +1,6 @@
 import Router from './Router';
-import { login, register, profile, sendNewPassword } from './API';
+import { login, register, profile, sendNewPassword, createChat } from './API';
+import closeModal from './closeModal';
 
 class Validations {
   public static INPUTS: Record<
@@ -71,6 +72,10 @@ class Validations {
       pattern: /(.|\s)*\S(.|\s)*/,
       errorMsg: 'Сообщение не может быть пустым',
     },
+    title: {
+      pattern: /(.|\s)*\S(.|\s)*/,
+      errorMsg: 'Название чата не может быть пустым',
+    },
   };
 }
 
@@ -126,7 +131,7 @@ const onSubmit = (event: any): void => {
 
   errorTarget.textContent = '';
 
-  const value: string = event.target.value;
+  const { value } = event.target;
 
   switch (value) {
     case 'Войти':
@@ -167,14 +172,24 @@ const onSubmit = (event: any): void => {
 
           setTimeout(() => {
             errorTarget.textContent = '';
+            closeModal(1000);
           }, 1000);
         })
         .catch(({ reason }) => {
           errorTarget.textContent = reason;
         });
       break;
+    case 'Создать чат':
+      createChat(formData)
+        .then((_value) => {
+          console.log(_value);
+        })
+        .catch(({ reason }) => {
+          console.log(reason);
+        });
+      break;
     default:
-      throw new Error('Аутентификация прошла не по плану');
+      throw new Error('Запрос пошел не по плану');
   }
 };
 

@@ -4,6 +4,9 @@
     <p class='item__name'>{{this.name}}</p>
     <p class='item__lastMsg'>{{this.lastMsg}}</p>
     <p class='item__time'>{{this.date}}</p>
-    <div class='item_unreadMsg'>{{this.unreadMsg}}</div>
+    <div
+      class='item_unreadMsg'
+      style='display: {{isUnreadCount}}'
+    >{{this.unreadMsg}}</div>
   </div>
 {{/each}}
