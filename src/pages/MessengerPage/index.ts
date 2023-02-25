@@ -37,6 +37,30 @@ function findChats() {
       console.log(error);
       return [];
     });
+
+  return [
+    {
+      avatar: i_avatar,
+      name: 'Имя',
+      lastMsg: 'Последнее сообщение',
+      date: '00.00',
+      unreadMsg: 0,
+    },
+    {
+      avatar: i_avatar,
+      name: 'Имя',
+      lastMsg: 'Последнее сообщение',
+      date: '00.00',
+      unreadMsg: 0,
+    },
+    {
+      avatar: i_avatar,
+      name: 'Имя',
+      lastMsg: 'Последнее сообщение',
+      date: '00.00',
+      unreadMsg: 0,
+    },
+  ];
 }
 
 export default class MessengerPage extends Block {

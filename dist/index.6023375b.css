@@ -336,6 +336,10 @@ input[type="file"]::file-selector-button {
   overflow: hidden;
 }
 
+.chat._active .wrapper__messages {
+  display: none;
+}
+
 .chat .chat__menu {
   max-width: 310px;
   width: 100%;
@@ -390,6 +394,16 @@ input[type="file"]::file-selector-button {
   justify-content: space-between;
   padding: 0 20px;
   display: flex;
+  position: relative;
+}
+
+.chat .chat__messages .wrapper__messages {
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 0;
 }
 
 .chat .chat__messages .messages__header {
