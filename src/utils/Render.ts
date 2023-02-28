@@ -4,11 +4,10 @@ export default function render(
   index: number = 0
 ): object {
   const root = document.querySelectorAll(query);
+  root[index].innerHTML = '';
 
   block._element.forEach((el) => {
-    root[index].innerHTML = '';
     root[index].appendChild(el);
-
     return root;
   });
 }

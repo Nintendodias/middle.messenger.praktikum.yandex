@@ -273,10 +273,6 @@ input[type="file"]::file-selector-button {
   inset: 0;
 }
 
-.--cursor {
-  cursor: pointer;
-}
-
 .modal {
   background: #00000080;
   justify-content: center;
@@ -311,6 +307,10 @@ input[type="file"]::file-selector-button {
 }
 
 
+
+.--cursor {
+  cursor: pointer;
+}
 
 
 
@@ -637,6 +637,8 @@ input[type="file"]::file-selector-button {
 .tooltip .tooltip__link + .tooltip__link {
   margin-top: 16px;
 }
+
+
 
 
 

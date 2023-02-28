@@ -1,6 +1,14 @@
 import Router from './Router';
-import { login, register, profile, sendNewPassword, createChat } from './API';
+import {
+  login,
+  register,
+  profile,
+  sendNewPassword,
+  createChat,
+  removeChat,
+} from './API';
 import closeModal from './closeModal';
+import addContactsItems from './Store/Actions';
 
 class Validations {
   public static INPUTS: Record<
@@ -182,11 +190,37 @@ const onSubmit = (event: any): void => {
     case 'Создать чат':
       createChat(formData)
         .then((_value) => {
-          console.log(_value);
+          addContactsItems();
+          closeModal(0);
         })
         .catch(({ reason }) => {
-          console.log(reason);
+          errorTarget.textContent = reason;
         });
+      break;
+    case 'Удалить чат':
+      const chats = document.querySelectorAll('.menu__list-item');
+
+      if (chats.length > 0) {
+        const chatToRemove = Array.from(chats).filter(
+          (chat) =>
+            chat.querySelector('.item__name').innerText === formData.title
+        );
+
+        if (chatToRemove) {
+          const id = +chatToRemove[0].dataset.chatid;
+
+          removeChat({
+            chatId: id,
+          })
+            .then((_value) => {
+              addContactsItems();
+              closeModal(0);
+            })
+            .catch(({ reason }) => {
+              console.log(reason);
+            });
+        }
+      }
       break;
     default:
       throw new Error('Запрос пошел не по плану');

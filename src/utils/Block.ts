@@ -83,17 +83,15 @@ class Block {
 
   private _componentDidUpdate(oldProps: unknown[], newProps: unknown[]): void {
     const response = this.componentDidUpdate(oldProps, newProps);
+
     if (!response) {
       return;
     }
-    this._render();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   public componentDidUpdate(oldProps: unknown[], newProps: unknown[]): Boolean {
-    if (oldProps && newProps) {
-      return true;
-    }
-    return false;
+    return oldProps !== newProps;
   }
 
   public setProps = (nextProps: unknown[]): void => {
@@ -101,9 +99,14 @@ class Block {
       return;
     }
 
-    this.eventBus().emit(Block.EVENTS.FLOW_CDU, this.props, nextProps);
+    const oldProps = { ...this.props };
 
-    Object.assign(this.props, nextProps);
+    if (Object.values(nextProps).length) {
+      Object.assign(this.props, nextProps);
+    }
+    const args = [oldProps, this.props];
+
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, args);
   };
 
   get element() {
@@ -188,22 +191,25 @@ class Block {
     if (this._children) {
       this._children.forEach((el, index) => {
         if (this.props) {
-          const { events }: Record<string, () => void> = (this.props as TProps)
-            .data[index];
+          const proEl = (this.props as TProps).data[index];
 
-          if (!events) {
-            return;
-          }
+          if (proEl) {
+            const { events }: Record<string, () => void> = proEl;
 
-          Object.entries(events).forEach(([event, listener]) => {
-            const target = el.querySelector('input')
-              ? el.querySelector('input')
-              : el;
-
-            if (target) {
-              target.removeEventListener(event, listener);
+            if (!events) {
+              return;
             }
-          });
+
+            Object.entries(events).forEach(([event, listener]) => {
+              const target = el.querySelector('input')
+                ? el.querySelector('input')
+                : el;
+
+              if (target) {
+                target.removeEventListener(event, listener);
+              }
+            });
+          }
         }
       });
     }

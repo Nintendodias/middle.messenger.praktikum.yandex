@@ -40,11 +40,21 @@ export function sendNewPassword(data) {
 }
 
 export function chats() {
-  return http.get('chats');
+  return http.get('chats', {
+    data: {
+      limit: 100,
+    },
+  });
 }
 
 export function createChat(data) {
   return http.post('chats', {
+    data: data,
+  });
+}
+
+export function removeChat(data) {
+  return http.delete('chats', {
     data: data,
   });
 }
