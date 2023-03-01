@@ -1,5 +1,5 @@
 import EventBus from './EventBus';
-import { setMessages } from './Store/Actions';
+import { setMessages, updateMessageArray } from './Store/Actions';
 
 class WebSocketMessages {
   static instance: WebSocketMessages;
@@ -41,12 +41,13 @@ class WebSocketMessages {
     this.socket.addEventListener('open', () => {
       this.eventBus.emit(WebSocketMessages.EVENTS.OPEN);
 
-      // this.socket.send(
-      //   JSON.stringify({
-      //     content: 'Чат активирован',
-      //     type: 'message',
-      //   })
-      // );
+      setInterval(
+        (self: WebSocketMessages) => {
+          self.ping();
+        },
+        10000,
+        this
+      );
     });
 
     this.socket.addEventListener('close', (event) => {
@@ -81,24 +82,11 @@ class WebSocketMessages {
     if (Array.isArray(data)) {
       data = data.filter(({ type }) => type === 'message').reverse();
       setMessages(data);
+    } else {
+      if (data.type !== 'message') return;
+
+      updateMessageArray(data);
     }
-
-    //1 - записать в стор список сообщений
-    // записать в формате: activeChat -> messages -> user_id === current id ? '--self, content, time
-
-    //     try {
-    //       let data = JSON.parse(event.data);
-    //       if (Array.isArray(data)) {
-    //         data = data.filter(({ type }) => type === 'message').reverse();
-    //       } else {
-    //         if (data.type !== 'message') return;
-    //         ACTIONS.addMessage(data);
-    //         return;
-    //       }
-    //       ACTIONS.setMessages(data);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
   }
 
   onError(event) {
@@ -130,53 +118,5 @@ class WebSocketMessages {
     this.eventBus.on(WebSocketMessages.EVENTS.CONNECT, this.connect.bind(this));
   }
 }
-
-// const WS = () => {
-//   const { id, token } = getChatProperties();
-//   const user = getUserId().id;
-
-//   const socket = new WebSocket(
-//     `wss://ya-praktikum.tech/ws/chats/${user}/${id}/${token}`
-//   );
-
-//   socket.addEventListener('open', () => {
-//     console.log('Соединение установлено');
-
-//     socket.send(
-//       JSON.stringify({
-//         content: 'Чат активирован',
-//         type: 'message',
-//       })
-//     );
-//   });
-
-//   socket.addEventListener('close', (event) => {
-//     if (event.wasClean) {
-//       console.log('Соединение закрыто чисто');
-//     } else {
-//       console.log('Обрыв соединения');
-//     }
-
-//     console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-//   });
-
-//   socket.addEventListener('message', (event) => {
-//     console.log('Получены данные', event.data);
-//   });
-
-//   socket.addEventListener('error', (event) => {
-//     console.log('Ошибка', event.message);
-//   });
-
-//   return socket;
-// };
-// const { id, token } = getChatProperties();
-// const user = getUserId().id;
-
-// console.log(id);
-// console.log(token);
-// console.log(user);
-
-// const WS = new WebSocketMessages(id, token, user);
 
 export default WebSocketMessages;

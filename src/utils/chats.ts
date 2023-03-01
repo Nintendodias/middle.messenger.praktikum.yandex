@@ -7,6 +7,8 @@ import {
 } from './Store/Actions';
 import WS from './WS';
 
+let websoket;
+
 const openChats = (event) => {
   const id = +event.target.dataset.chatid;
 
@@ -24,7 +26,7 @@ const openChats = (event) => {
           }
 
           const user = getUserId().id;
-          const websoket = new WS(id, token, user);
+          websoket = new WS(id, token, user);
 
           const mask = document.querySelector('.chat');
 
@@ -41,4 +43,14 @@ const openChats = (event) => {
     });
 };
 
-export default openChats;
+const sendMessage = (event) => {
+  const form = event.target.closest('form');
+  const textarea = form?.querySelector('textarea');
+
+  if (textarea) {
+    websoket.sendMessage(textarea.value);
+    textarea.value = '';
+  }
+};
+
+export { openChats, sendMessage };

@@ -33,6 +33,7 @@ import {
   setMessages,
 } from '../../utils/Store/Actions';
 import State from '../../utils/Store/Store';
+import { sendMessage } from '../../utils/chats';
 
 const store = new State();
 
@@ -152,6 +153,9 @@ export default class MessengerPage extends Block {
             width: '28px',
             height: '28px',
             class: '--cursor',
+            events: {
+              click: sendMessage,
+            },
           },
         ],
       }),

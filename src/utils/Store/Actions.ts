@@ -1,7 +1,7 @@
 import Store from './Store';
 import { chats, addUserInChat, getUsersInChat } from '../API';
 import { i_avatar } from '../StaticFileExport';
-import openChats from '../chats';
+import { openChats } from '../chats';
 
 const store = new Store();
 
@@ -86,6 +86,25 @@ function setMessages(data = []) {
   store.set('messages', msgs);
 }
 
+function getMessages() {
+  return store.getState()?.messages;
+}
+
+function updateMessageArray(msg) {
+  const date = new Date(msg.time);
+
+  const msgs = [
+    ...getMessages(),
+    {
+      text: msg.content,
+      date: `${date.getHours()}:${date.getMinutes()}`,
+      isSelf: msg.user_id === getUserId().id ? '--self' : '',
+    },
+  ];
+
+  store.set('messages', msgs);
+}
+
 export {
   addContactsItems,
   setStoreChatProperty,
@@ -95,4 +114,5 @@ export {
   addUsersInChat,
   setChatUsers,
   setMessages,
+  updateMessageArray,
 };
