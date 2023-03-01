@@ -498,6 +498,10 @@ input[type="file"]::file-selector-button {
   overflow: hidden;
 }
 
+.menu__list-item * {
+  pointer-events: none;
+}
+
 .menu__list-item .item__avatar {
   width: 47px;
   height: 47px;
@@ -538,7 +542,7 @@ input[type="file"]::file-selector-button {
   border-radius: 11px;
   justify-content: center;
   align-items: center;
-  padding: 5px 7px;
+  padding: 5px 9px;
   font-size: 11px;
   font-style: normal;
   font-weight: 500;
@@ -637,6 +641,8 @@ input[type="file"]::file-selector-button {
 .tooltip .tooltip__link + .tooltip__link {
   margin-top: 16px;
 }
+
+
 
 
 

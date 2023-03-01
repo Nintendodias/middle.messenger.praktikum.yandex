@@ -5,9 +5,11 @@ import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 import MessengerPage from './pages/MessengerPage';
 import { user } from './utils/API';
+import { setUserId } from './utils/Store/Actions';
 
 user()
   .then((_value) => {
+    setUserId(JSON.parse(_value).id);
     if (window.location.pathname !== '/profile') {
       Router.getInstance().go('/messenger');
     }

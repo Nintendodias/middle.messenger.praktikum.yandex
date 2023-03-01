@@ -58,3 +58,32 @@ export function removeChat(data) {
     data: data,
   });
 }
+
+export function connectToChat(id) {
+  return http.post(`chats/token/${id}`, {});
+}
+
+export function searchUserByName(name: string) {
+  return http.post('user/search', {
+    data: {
+      login: name,
+    },
+  });
+}
+
+export function addUserInChat(users: Array<number>, chatId: number) {
+  return http.put('chats/users', {
+    data: {
+      users,
+      chatId,
+    },
+  });
+}
+
+export function getUsersInChat(chatId: number) {
+  console.log(chatId);
+}
+
+export function getChatUsers(id: number) {
+  return http.get(`chats/${id}/users`);
+}

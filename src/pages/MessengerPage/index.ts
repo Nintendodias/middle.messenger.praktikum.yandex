@@ -25,19 +25,28 @@ import {
 } from '../../utils/StaticFileExport';
 import ModalAddChat from '../../components/Modals/ModalAddChat';
 import ModalRemoveChat from '../../components/Modals/ModalRemoveChat';
+import ModalAddUsersInChat from '../../components/Modals/ModalAddUsersInChat';
 import openModal from '../../utils/openModal';
-import addContactsItems from '../../utils/Store/Actions';
+import {
+  addContactsItems,
+  setStoreChatProperty,
+} from '../../utils/Store/Actions';
 import State from '../../utils/Store/Store';
 
 const store = new State();
 
 addContactsItems();
+setStoreChatProperty();
 
 type TProps = Record<string, unknown>;
 
 export default class MessengerPage extends Block {
   constructor(props: TProps) {
     super('div', props, [
+      new ModalAddUsersInChat({
+        target: '[ data-render="modal2"]',
+        data: [{}],
+      }),
       new ModalAddChat({
         target: '[ data-render="modal0"]',
         data: [{}],

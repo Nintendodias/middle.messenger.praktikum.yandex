@@ -6,9 +6,10 @@ import {
   sendNewPassword,
   createChat,
   removeChat,
+  searchUserByName,
 } from './API';
 import closeModal from './closeModal';
-import addContactsItems from './Store/Actions';
+import { addContactsItems, addUsersInChat } from './Store/Actions';
 
 class Validations {
   public static INPUTS: Record<
@@ -206,9 +207,8 @@ const onSubmit = (event: any): void => {
             chat.querySelector('.item__name').innerText === formData.title
         );
 
-        if (chatToRemove) {
+        if (chatToRemove.length > 0) {
           const id = +chatToRemove[0].dataset.chatid;
-
           removeChat({
             chatId: id,
           })
@@ -221,6 +221,24 @@ const onSubmit = (event: any): void => {
             });
         }
       }
+      break;
+    case 'Добавить контакт':
+      searchUserByName(formData.title)
+        .then((value) => {
+          const data = JSON.parse(value);
+
+          if (data.length === 0) {
+            errorTarget.textContent = 'Логин пользователя не найден';
+            return;
+          }
+
+          if (data[0].id) {
+            addUsersInChat(data[0].id);
+          }
+        })
+        .catch(({ reason }) => {
+          errorTarget.textContent = reason;
+        });
       break;
     default:
       throw new Error('Запрос пошел не по плану');
