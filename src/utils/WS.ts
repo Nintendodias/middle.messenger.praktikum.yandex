@@ -1,4 +1,5 @@
 import EventBus from './EventBus';
+import { setMessages } from './Store/Actions';
 
 class WebSocketMessages {
   static instance: WebSocketMessages;
@@ -40,14 +41,12 @@ class WebSocketMessages {
     this.socket.addEventListener('open', () => {
       this.eventBus.emit(WebSocketMessages.EVENTS.OPEN);
 
-      console.log('Соединение установлено');
-
-      this.socket.send(
-        JSON.stringify({
-          content: 'Чат активирован',
-          type: 'message',
-        })
-      );
+      // this.socket.send(
+      //   JSON.stringify({
+      //     content: 'Чат активирован',
+      //     type: 'message',
+      //   })
+      // );
     });
 
     this.socket.addEventListener('close', (event) => {
@@ -77,7 +76,16 @@ class WebSocketMessages {
   }
 
   onMessage(event) {
-    console.log(event);
+    let data = JSON.parse(event.data);
+
+    if (Array.isArray(data)) {
+      data = data.filter(({ type }) => type === 'message').reverse();
+      setMessages(data);
+    }
+
+    //1 - записать в стор список сообщений
+    // записать в формате: activeChat -> messages -> user_id === current id ? '--self, content, time
+
     //     try {
     //       let data = JSON.parse(event.data);
     //       if (Array.isArray(data)) {

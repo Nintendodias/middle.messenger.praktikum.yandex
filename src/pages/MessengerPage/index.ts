@@ -30,6 +30,7 @@ import openModal from '../../utils/openModal';
 import {
   addContactsItems,
   setStoreChatProperty,
+  setMessages,
 } from '../../utils/Store/Actions';
 import State from '../../utils/Store/Store';
 
@@ -37,6 +38,7 @@ const store = new State();
 
 addContactsItems();
 setStoreChatProperty();
+setMessages();
 
 type TProps = Record<string, unknown>;
 
@@ -57,98 +59,7 @@ export default class MessengerPage extends Block {
       }),
       new Messages({
         target: '[data-render="messages"]',
-        data: [
-          {
-            isSelf: '',
-            text: 'Lorem ',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-          {
-            isSelf: '--self',
-            text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Praesentium deserunt minima aliquam hic aperiam mollitia, quo itaque, perspiciatis harum facere voluptates perferendis eos nihil veniam optio cum, at placeat reprehenderit.',
-            date: '00:00',
-          },
-        ],
+        data: store.getState() ? store.getState().messages : [{}],
       }),
       new ContactsItems({
         target: '[data-render="contacts"]',

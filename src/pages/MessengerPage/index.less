@@ -10,7 +10,7 @@
 
   &._active {
     .wrapper__messages {
-      display: none;
+      display: none !important;
     }
   }
 
@@ -100,15 +100,16 @@
 
     .messages__wrapper {
       height: calc(100% - 54px - 32px);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      overflow-y: scroll;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
 
-      &::-webkit-scrollbar {
-        display: none;
+      & > div {
+        height: 100%;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
 

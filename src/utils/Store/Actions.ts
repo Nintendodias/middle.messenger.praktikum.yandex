@@ -70,6 +70,22 @@ function setChatUsers() {
   getUsersInChat(getChatProperties().id);
 }
 
+function setMessages(data = []) {
+  const msgs =
+    data.length !== 0
+      ? data.map((msg) => {
+          const date = new Date(msg.time);
+          return {
+            text: msg.content,
+            date: `${date.getHours()}:${date.getMinutes()}`,
+            isSelf: msg.user_id === getUserId().id ? '--self' : '',
+          };
+        })
+      : [];
+
+  store.set('messages', msgs);
+}
+
 export {
   addContactsItems,
   setStoreChatProperty,
@@ -78,4 +94,5 @@ export {
   getUserId,
   addUsersInChat,
   setChatUsers,
+  setMessages,
 };

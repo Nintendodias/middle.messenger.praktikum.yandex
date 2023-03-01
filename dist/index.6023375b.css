@@ -333,7 +333,7 @@ input[type="file"]::file-selector-button {
 }
 
 .chat._active .wrapper__messages {
-  display: none;
+  display: none !important;
 }
 
 .chat .chat__menu {
@@ -420,15 +420,16 @@ input[type="file"]::file-selector-button {
 
 .chat .chat__messages .messages__wrapper {
   height: calc(100% - 86px);
+}
+
+.chat .chat__messages .messages__wrapper > div {
+  height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  flex-direction: column;
-  justify-content: flex-start;
-  display: flex;
   overflow-y: scroll;
 }
 
-.chat .chat__messages .messages__wrapper::-webkit-scrollbar {
+.chat .chat__messages .messages__wrapper > div::-webkit-scrollbar {
   display: none;
 }
 

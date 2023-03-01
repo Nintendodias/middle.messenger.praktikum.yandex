@@ -4,21 +4,21 @@ import SignInPage from './pages/SignInPage';
 import ProfilePage from './pages/ProfilePage';
 import ErrorPage from './pages/ErrorPage';
 import MessengerPage from './pages/MessengerPage';
-import { user } from './utils/API';
-import { setUserId } from './utils/Store/Actions';
+// import { user } from './utils/API';
+// import { setUserId } from './utils/Store/Actions';
 
-user()
-  .then((_value) => {
-    setUserId(JSON.parse(_value).id);
-    if (window.location.pathname !== '/profile') {
-      Router.getInstance().go('/messenger');
-    }
-  })
-  .catch((_error) => {
-    if (window.location.pathname !== '/sign-in') {
-      Router.getInstance().go('/');
-    }
-  });
+// user()
+//   .then((_value) => {
+//     setUserId(JSON.parse(_value).id);
+//     if (window.location.pathname !== '/profile') {
+//       Router.getInstance().go('/messenger');
+//     }
+//   })
+//   .catch((_error) => {
+//     if (window.location.pathname !== '/sign-in') {
+//       Router.getInstance().go('/');
+//     }
+//   });
 
 const router = new Router('#root');
 

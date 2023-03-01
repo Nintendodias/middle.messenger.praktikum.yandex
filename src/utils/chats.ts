@@ -25,13 +25,19 @@ const openChats = (event) => {
 
           const user = getUserId().id;
           const websoket = new WS(id, token, user);
+
+          const mask = document.querySelector('.chat');
+
+          if (mask) {
+            mask.classList.add('_active');
+          }
         })
         .catch(({ reason }) => {
           console.error(reason);
         });
     })
-    .catch(({ reason }) => {
-      console.log(reason);
+    .catch((error) => {
+      console.log(error);
     });
 };
 
