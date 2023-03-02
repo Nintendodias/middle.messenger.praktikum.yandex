@@ -7,6 +7,7 @@ import ContactsItems from '../../components/ContactsItems/index';
 import Messages from '../../components/Messages/index';
 import Tooltip from '../../components/Tooltip/index';
 import Image from '../../components/Image';
+import Header from '../../components/Header';
 import {
   ButtonTooltip,
   openTooltip,
@@ -26,6 +27,7 @@ import {
 import ModalAddChat from '../../components/Modals/ModalAddChat';
 import ModalRemoveChat from '../../components/Modals/ModalRemoveChat';
 import ModalAddUsersInChat from '../../components/Modals/ModalAddUsersInChat';
+import ModalChangeAvatar from '../../components/Modals/ModalChangeAvatar';
 import openModal from '../../utils/openModal';
 import {
   addContactsItems,
@@ -57,6 +59,11 @@ export default class MessengerPage extends Block {
       new ModalRemoveChat({
         target: '[ data-render="modal1"]',
         data: [{}],
+      }),
+      new ModalChangeAvatar({
+        target: '[data-render="modal3"]',
+        data: [{}],
+        from: 'message',
       }),
       new Messages({
         target: '[data-render="messages"]',
@@ -111,6 +118,18 @@ export default class MessengerPage extends Block {
           },
         ],
       }),
+      new Tooltip({
+        target: '[data-render="tooltip2"]',
+        data: [
+          {
+            icon: i_add,
+            text: 'Сменить иконку',
+            events: {
+              click: () => openModal('modal3'),
+            },
+          },
+        ],
+      }),
       new ButtonTooltip({
         target: '[data-render="button_tooltip0"]',
         data: [
@@ -135,13 +154,26 @@ export default class MessengerPage extends Block {
           },
         ],
       }),
-      new Image({
-        target: '[data-render="image0"]',
+      new ButtonTooltip({
+        target: '[data-render="button_tooltip2"]',
+        data: [
+          {
+            className: 'burger__menu',
+            link: i_burger,
+            events: {
+              click: openTooltip,
+            },
+          },
+        ],
+      }),
+      new Header({
+        target: '[data-render="header"]',
         data: [
           {
             url: i_avatar,
             width: '44px',
             height: '44px',
+            title: 'Имя',
           },
         ],
       }),

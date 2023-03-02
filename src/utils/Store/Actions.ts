@@ -1,5 +1,5 @@
 import Store from './Store';
-import { chats, addUserInChat, getUsersInChat } from '../API';
+import { chats, addUserInChat, getUsersInChat, sendChatAvatar } from '../API';
 import { i_avatar } from '../StaticFileExport';
 import { openChats } from '../chats';
 
@@ -11,7 +11,9 @@ function addContactsItems() {
       const chs = JSON.parse(value);
 
       const result = chs.map((chat) => {
-        const avatar = chat.avatar ? chat.avatar : i_avatar;
+        const avatar = chat.avatar
+          ? `https://ya-praktikum.tech/api/v2/resources/${chat.avatar}`
+          : i_avatar;
         const lastMsg = chat.last_message ? chat.last_message.content : '';
         const date = chat.last_message
           ? new Date(Date.parse(chat.last_message.time))
@@ -50,6 +52,10 @@ function setStoreChatProperty(id: number | null = null, token: string = '') {
 
 function getChatProperties() {
   return store.getState()?.activeChat;
+}
+
+function getContactsProperties() {
+  return store.getState()?.chats;
 }
 
 function setUserId(id) {
@@ -105,6 +111,18 @@ function updateMessageArray(msg) {
   store.set('messages', msgs);
 }
 
+function updateStoreByChangeAvatarChat(avatar: string, chatId: number) {
+  const str = getContactsProperties();
+  const findIndexChat = str.findIndex((chat) => chat.id === chatId);
+  const backup = str[findIndexChat];
+
+  backup.avatar = `${avatar}`;
+
+  str[findIndexChat] = backup;
+
+  store.set('chats', str);
+}
+
 export {
   addContactsItems,
   setStoreChatProperty,
@@ -115,4 +133,6 @@ export {
   setChatUsers,
   setMessages,
   updateMessageArray,
+  updateStoreByChangeAvatarChat,
+  getContactsProperties,
 };

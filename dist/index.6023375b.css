@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  z-index: 1;
 }
 
 body {
@@ -274,6 +273,7 @@ input[type="file"]::file-selector-button {
 }
 
 .modal {
+  z-index: 1001;
   background: #00000080;
   justify-content: center;
   align-items: center;
@@ -405,27 +405,33 @@ input[type="file"]::file-selector-button {
 .chat .chat__messages .messages__header {
   min-height: 54px;
   border-bottom: 1px solid #eaeaea;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  gap: 0 10px;
   display: flex;
 }
 
-.chat .chat__messages .messages__header .messages__header-name {
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 13px;
+.chat .chat__messages .messages__header .message__right .burger__menu {
+  cursor: pointer;
+}
+
+.chat .chat__messages .messages__header .message__right .tooltip {
+  z-index: 1000;
+  top: 50px;
+  right: 20px;
 }
 
 .chat .chat__messages .messages__wrapper {
   height: calc(100% - 107px);
+  padding-bottom: 20px;
 }
 
 .chat .chat__messages .messages__wrapper > div {
   height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  display: flex;
   overflow-y: scroll;
 }
 
@@ -642,6 +648,20 @@ input[type="file"]::file-selector-button {
 
 .tooltip .tooltip__link + .tooltip__link {
   margin-top: 16px;
+}
+
+.messages__header-wrapper {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0 10px;
+  display: flex;
+}
+
+.messages__header-wrapper .messages__header-name {
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 13px;
 }
 
 

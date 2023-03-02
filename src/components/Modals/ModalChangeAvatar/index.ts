@@ -10,6 +10,7 @@ import { i_close } from '../../../utils/StaticFileExport';
 import closeModal from '../../../utils/closeModal';
 import Title20 from '../../Title20';
 import changeAvatar from '../../../utils/changeAvatar';
+import changeChatAvatar from '../../../utils/changeChatAvatar';
 
 type TProps = Record<string, unknown>;
 
@@ -68,7 +69,7 @@ export default class ModalChangeAvatar extends Block {
             className: 'form__button',
             disabled: '',
             events: {
-              click: changeAvatar,
+              click: props.from === 'message' ? changeChatAvatar : changeAvatar,
             },
           },
         ],

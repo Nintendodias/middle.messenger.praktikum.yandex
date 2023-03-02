@@ -1,6 +1,7 @@
 import './index.less';
 import Block from '../../utils/Block';
 import template from './Image.hbs';
+import { getChatProperties } from '../../utils/Store/Actions';
 
 type TProps = Record<string, unknown>;
 

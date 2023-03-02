@@ -16,8 +16,15 @@
     </div>
     <div class='chat__messages'>
       <div class='messages__header'>
-        <div class='messages__header-avatar' data-render='image0'></div>
-        <p class='messages__header-name'>Имя</p>
+        <div class='message__left'>
+          <div data-render='header'></div>
+        </div>
+        <div class='message__right'>
+          <div data-render='button_tooltip2'></div>
+          <div class='tooltip'>
+            <div data-render='tooltip2'></div>
+          </div>
+        </div>
       </div>
       <div class='messages__wrapper'>
         <div data-render='messages'></div>
@@ -45,5 +52,6 @@
     <div class='modal' data-render='modal0'></div>
     <div class='modal' data-render='modal1'></div>
     <div class='modal' data-render='modal2'></div>
+    <div class='modal' data-render='modal3'></div>
   </main>
 {{/each}}

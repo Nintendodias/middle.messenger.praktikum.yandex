@@ -84,28 +84,36 @@
 
     .messages__header {
       min-height: 54px;
+      border-bottom: 1px solid @color-lightgrey;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 0 10px;
-      border-bottom: 1px solid @color-lightgrey;
+      justify-content: space-between;
 
-      .messages__header-name {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 13px;
+      .message__right {
+        .burger__menu {
+          cursor: pointer;
+        }
+
+        .tooltip {
+          right: 20px;
+          z-index: 1000;
+          top: 50px;
+        }
       }
     }
 
     .messages__wrapper {
       height: calc(100% - 54px - 53px);
+      padding-bottom: 20px;
 
       & > div {
         height: 100%;
         overflow-y: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
 
         &::-webkit-scrollbar {
           display: none;

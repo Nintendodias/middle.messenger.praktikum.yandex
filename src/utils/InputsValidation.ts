@@ -234,6 +234,7 @@ const onSubmit = (event: any): void => {
 
           if (data[0].id) {
             addUsersInChat(data[0].id);
+            closeModal(0);
           }
         })
         .catch(({ reason }) => {

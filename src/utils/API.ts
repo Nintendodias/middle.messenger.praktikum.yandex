@@ -87,3 +87,10 @@ export function getUsersInChat(chatId: number) {
 export function getChatUsers(id: number) {
   return http.get(`chats/${id}/users`);
 }
+
+export function sendChatAvatar(data) {
+  return http.put('chats/avatar', {
+    data: data,
+    headers: null,
+  });
+}
