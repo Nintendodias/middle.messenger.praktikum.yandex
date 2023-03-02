@@ -403,7 +403,7 @@ input[type="file"]::file-selector-button {
 }
 
 .chat .chat__messages .messages__header {
-  height: 54px;
+  min-height: 54px;
   border-bottom: 1px solid #eaeaea;
   justify-content: flex-start;
   align-items: center;
@@ -419,7 +419,7 @@ input[type="file"]::file-selector-button {
 }
 
 .chat .chat__messages .messages__wrapper {
-  height: calc(100% - 86px);
+  height: calc(100% - 107px);
 }
 
 .chat .chat__messages .messages__wrapper > div {
@@ -434,6 +434,7 @@ input[type="file"]::file-selector-button {
 }
 
 .chat .chat__messages .messages__footer {
+  height: 53px;
   border-top: 1px solid #eaeaea;
   justify-content: space-between;
   align-items: flex-end;
