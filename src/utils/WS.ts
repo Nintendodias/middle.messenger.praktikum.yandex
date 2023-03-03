@@ -30,15 +30,15 @@ class WebSocketMessages {
   }
 
   connect() {
-    if (this.socket?.readyState === WebSocket.OPEN) {
-      this.disconnect();
-    }
+    // if (this.socket?.readyState === WebSocket.OPEN) {
+    //   this.disconnect();
+    // }
 
     const WS_MESSAGES_URL = `wss://ya-praktikum.tech/ws/chats/${this.user}/${this.id}/${this.token}`;
 
     this.socket = new WebSocket(WS_MESSAGES_URL);
 
-    this.socket.addEventListener('open', () => {
+    this.socket.addEventListener('open', (e) => {
       this.eventBus.emit(WebSocketMessages.EVENTS.OPEN);
 
       setInterval(

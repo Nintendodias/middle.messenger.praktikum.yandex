@@ -9,7 +9,11 @@ import {
   searchUserByName,
 } from './API';
 import closeModal from './closeModal';
-import { addContactsItems, addUsersInChat } from './Store/Actions';
+import {
+  addContactsItems,
+  addUsersInChat,
+  updateUserId,
+} from './Store/Actions';
 
 class Validations {
   public static INPUTS: Record<
@@ -146,6 +150,7 @@ const onSubmit = (event: any): void => {
     case 'Войти':
       login(formData)
         .then((_value) => {
+          updateUserId();
           Router.getInstance().go('/messenger');
         })
         .catch(({ reason }) => {
@@ -155,6 +160,7 @@ const onSubmit = (event: any): void => {
     case 'Зарегистрироваться':
       register(formData)
         .then((_value) => {
+          updateUserId();
           Router.getInstance().go('/messenger');
         })
         .catch(({ reason }) => {

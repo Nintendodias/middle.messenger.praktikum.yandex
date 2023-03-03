@@ -1,5 +1,11 @@
 import Store from './Store';
-import { chats, addUserInChat, getUsersInChat, sendChatAvatar } from '../API';
+import {
+  chats,
+  addUserInChat,
+  getUsersInChat,
+  sendChatAvatar,
+  user,
+} from '../API';
 import { i_avatar } from '../StaticFileExport';
 import { openChats } from '../chats';
 
@@ -56,6 +62,22 @@ function getChatProperties() {
 
 function getContactsProperties() {
   return store.getState()?.chats;
+}
+
+function updateUserId() {
+  user()
+    .then((_value) => {
+      const data = JSON.parse(_value);
+
+      if (data) {
+        const id = data.id;
+
+        setUserId(id);
+      }
+    })
+    .catch(({ reason }) => {
+      console.log(reason);
+    });
 }
 
 function setUserId(id) {
@@ -135,4 +157,5 @@ export {
   updateMessageArray,
   updateStoreByChangeAvatarChat,
   getContactsProperties,
+  updateUserId,
 };
