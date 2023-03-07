@@ -1,15 +1,8 @@
-const openModal = (event: any): void => {
-  const buttonDataset = event.target.getAttribute('data-button');
-  const modal = document.querySelector(`[data-modal="${buttonDataset}"]`);
+const openModal = (target: string): void => {
+  const modal = document.querySelector(`[data-render="${target}"]`);
 
-  if (modal && buttonDataset) {
+  if (modal) {
     modal.classList.add('_active');
-
-    modal?.addEventListener('click', (e: any) => {
-      if (e.target && e.target.classList.contains('modal_close')) {
-        modal.classList.remove('_active');
-      }
-    });
   }
 };
 

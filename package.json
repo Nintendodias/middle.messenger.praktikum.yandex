@@ -9,14 +9,14 @@
     "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "devDependencies": {
-    "@parcel/transformer-less": "^2.8.2",
+    "@parcel/transformer-less": "^2.8.3",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
     "eslint": "^8.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "nodemon": "^2.0.20",
-    "parcel": "latest",
+    "parcel": "2.8.3",
     "parcel-transformer-hbs": "^1.0.4",
     "path-browserify": "^1.0.1",
     "process": "^0.11.10",

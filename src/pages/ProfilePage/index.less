@@ -1,0 +1,26 @@
+@import url('../../baseui/form.less');
+@import url('../../baseui/colors.less');
+
+.form .form__button.--main {
+  display: none;
+}
+
+.form._active .form__button.--main {
+  display: block;
+}
+
+input[type='file'] {
+  margin-bottom: 20px;
+
+  &::file-selector-button {
+    font-weight: bold;
+    padding: 0.5em;
+    border: none;
+    border-radius: 3px;
+    background-color: @color-black;
+    color: @color-white;
+    font-weight: 500;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+}

@@ -19,6 +19,7 @@ class Block {
   private _meta: {
     tagName: string;
     props: object;
+    childrenComponents: Array<any>;
   };
 
   private eventBus: () => EventBus;
@@ -32,11 +33,16 @@ class Block {
    * @returns {void}
    */
 
-  constructor(tagName: string = 'div', props: TProps = {}) {
+  constructor(
+    tagName: string = 'div',
+    props: TProps = {},
+    childrenComponents: Array<any> = []
+  ) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
       props,
+      childrenComponents,
     };
 
     this.eventBus = () => eventBus;
@@ -61,11 +67,12 @@ class Block {
   public init(): void {
     this._createResources();
 
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   private _componentDidMount(): void {
     this.componentDidMount();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   public componentDidMount() {}
@@ -76,17 +83,15 @@ class Block {
 
   private _componentDidUpdate(oldProps: unknown[], newProps: unknown[]): void {
     const response = this.componentDidUpdate(oldProps, newProps);
+
     if (!response) {
       return;
     }
-    this._render();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
   public componentDidUpdate(oldProps: unknown[], newProps: unknown[]): Boolean {
-    if (oldProps && newProps) {
-      return true;
-    }
-    return false;
+    return oldProps !== newProps;
   }
 
   public setProps = (nextProps: unknown[]): void => {
@@ -94,7 +99,14 @@ class Block {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    const oldProps = { ...this.props };
+
+    if (Object.values(nextProps).length) {
+      Object.assign(this.props, nextProps);
+    }
+    const args = [oldProps, this.props];
+
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, args);
   };
 
   get element() {
@@ -111,17 +123,42 @@ class Block {
     const htmlString = template(dataObj);
     const tmpl = document.createElement('template');
     tmpl.innerHTML = htmlString;
-
     return tmpl.content;
   }
 
   private _render(): void {
     const block = this.render();
     this._removeEvents();
+
     if (this._element) {
       this._children = Array.from(block.children);
       this._addEvents();
       this._element = this._children;
+      this._addChildrenComponents();
+    }
+  }
+
+  private _addChildrenComponents(): void {
+    if (this._children) {
+      const { childrenComponents } = this._meta;
+
+      if (childrenComponents && childrenComponents.length > 0) {
+        childrenComponents.forEach((component) => {
+          if (this._element && this._element[0]) {
+            const qSel = this._element[0].querySelectorAll(
+              component.props.target
+            );
+
+            if (qSel.length > 0) {
+              const curentElements = component.element;
+
+              curentElements.forEach((el) => {
+                qSel[0].appendChild(el);
+              });
+            }
+          }
+        });
+      }
     }
   }
 
@@ -154,29 +191,28 @@ class Block {
     if (this._children) {
       this._children.forEach((el, index) => {
         if (this.props) {
-          const { events }: Record<string, () => void> = (this.props as TProps)
-            .data[index];
+          const proEl = (this.props as TProps).data[index];
 
-          if (!events) {
-            return;
-          }
+          if (proEl) {
+            const { events }: Record<string, () => void> = proEl;
 
-          Object.entries(events).forEach(([event, listener]) => {
-            const target = el.querySelector('input')
-              ? el.querySelector('input')
-              : el;
-
-            if (target) {
-              target.removeEventListener(event, listener);
+            if (!events) {
+              return;
             }
-          });
+
+            Object.entries(events).forEach(([event, listener]) => {
+              const target = el.querySelector('input')
+                ? el.querySelector('input')
+                : el;
+
+              if (target) {
+                target.removeEventListener(event, listener);
+              }
+            });
+          }
         }
       });
     }
-  }
-
-  getContent() {
-    return this.element;
   }
 
   private _makePropsProxy(props: TProps) {
@@ -204,15 +240,13 @@ class Block {
     return document.createElement(tagName);
   }
 
-  // public show() {
-  //   if (this.getContent() !== null) {
-  //     this.getContent().style.display = 'block';
-  //   }
-  // }
+  getContent() {
+    return this.element;
+  }
 
-  // public hide() {
-  //   this.getContent().style.display = 'none';
-  // }
+  leave() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+  }
 }
 
 export default Block;
