@@ -33,11 +33,7 @@ class Block {
    * @returns {void}
    */
 
-  constructor(
-    tagName: string = 'div',
-    props: TProps = {},
-    childrenComponents: Array<any> = [],
-  ) {
+  constructor(tagName: string = 'div', props: TProps = {}, childrenComponents: Array<any> = []) {
     const eventBus = new EventBus();
     this._meta = {
       tagName,
@@ -150,9 +146,9 @@ class Block {
         childrenComponents.forEach((component) => {
           if (this._element) {
             if ((this._element as Array<Element>).length > 0) {
-              const qSel = (
-                this._element as Array<Element>
-              )[0].querySelectorAll(component.props.target);
+              const qSel = (this._element as Array<Element>)[0].querySelectorAll(
+                component.props.target,
+              );
 
               if (qSel.length > 0) {
                 const curentElements: Array<Element> = component.element;
@@ -172,17 +168,14 @@ class Block {
     if (this._children) {
       this._children.forEach((el, index) => {
         if (this.props) {
-          const { events }: Record<string, () => void> = (this.props as TProps)
-            .data[index];
+          const { events }: Record<string, () => void> = (this.props as TProps).data[index];
 
           if (!events) {
             return;
           }
 
           Object.entries(events).forEach(([event, listener]) => {
-            const target = el.querySelector('input')
-              ? el.querySelector('input')
-              : el;
+            const target = el.querySelector('input') ? el.querySelector('input') : el;
 
             if (target) {
               target.addEventListener(event, listener);
@@ -208,9 +201,7 @@ class Block {
               }
 
               Object.entries(events).forEach(([event, listener]) => {
-                const target = el.querySelector('input')
-                  ? el.querySelector('input')
-                  : el;
+                const target = el.querySelector('input') ? el.querySelector('input') : el;
 
                 if (target) {
                   target.removeEventListener(event, listener);
