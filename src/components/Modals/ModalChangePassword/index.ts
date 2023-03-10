@@ -1,13 +1,16 @@
 import '../modal.less';
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../../utils/Block';
-import template from './ModalChangePassword.hbs';
 import Input from '../../Input';
 import { onSubmit, validate } from '../../../utils/InputsValidation';
 import Button from '../../Button';
 import Image from '../../Image';
 import { i_close } from '../../../utils/StaticFileExport';
 import closeModal from '../../../utils/closeModal';
+import tmpl from './ModalChangePassword.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 

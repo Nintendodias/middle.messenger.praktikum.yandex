@@ -1,55 +1,68 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable import/no-cycle */
 import { connectToChat, getChatUsers } from './API';
 import openModal from './openModal';
-import {
-  setStoreChatProperty,
-  getChatProperties,
-  getUserId,
-} from './Store/Actions';
+import { setStoreChatProperty, getChatProperties, getUserId } from './Store/Actions';
 import WS from './WS';
 
-let websoket;
+let websoket: WS;
 
-const openChats = (event) => {
-  const id = +event.target.dataset.chatid;
+const openChats = (event: Event) => {
+  const ev = event;
 
-  connectToChat(id)
-    .then((value) => {
-      const token = JSON.parse(value).token;
+  if (ev && ev.target) {
+    const data: string | undefined = (ev.target as HTMLElement).dataset.chatid;
 
-      setStoreChatProperty(id, token);
-      getChatUsers(getChatProperties().id)
+    if (data) {
+      const id: number = +data;
+
+      connectToChat(id)
         .then((value) => {
-          const data = JSON.parse(value);
+          const { token } = JSON.parse(value as string);
 
-          if (data.length <= 1) {
-            openModal('modal2');
-          }
+          setStoreChatProperty(id, token);
+          const chatProp = getChatProperties();
 
-          const user = getUserId().id;
-          websoket = new WS(id, token, user);
+          if (chatProp) {
+            getChatUsers(chatProp.id)
+              .then((value) => {
+                const data = JSON.parse(value as string);
 
-          const mask = document.querySelector('.chat');
+                if (data.length <= 1) {
+                  openModal('modal2');
+                }
 
-          if (mask) {
-            mask.classList.add('_active');
+                const user = getUserId().id;
+                websoket = new WS(id, token, user);
+
+                const mask = document.querySelector('.chat');
+
+                if (mask) {
+                  mask.classList.add('_active');
+                }
+              })
+              .catch(({ reason }) => {
+                console.error(reason);
+              });
           }
         })
-        .catch(({ reason }) => {
-          console.error(reason);
+        .catch((error) => {
+          console.log(error);
         });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    }
+  }
 };
 
-const sendMessage = (event) => {
-  const form = event.target.closest('form');
-  const textarea = form?.querySelector('textarea');
+const sendMessage = (event: Event) => {
+  const ev = event;
+  if (ev && ev.target) {
+    const form = (ev.target as HTMLElement).closest('form');
+    const textarea = form?.querySelector('textarea');
 
-  if (textarea) {
-    websoket.sendMessage(textarea.value);
-    textarea.value = '';
+    if (textarea) {
+      websoket.sendMessage(textarea.value);
+      textarea.value = '';
+    }
   }
 };
 

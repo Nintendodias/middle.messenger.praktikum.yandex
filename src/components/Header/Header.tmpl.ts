@@ -1,0 +1,17 @@
+/* eslint-disable no-tabs */
+const tpl: string = `
+{{#each data}}
+  <div class='messages__header-wrapper'>
+    <img
+      width='{{this.width}}'
+      height='{{this.height}}'
+      src='{{this.url}}'
+      alt=''
+      class='messages__header-avatar'
+    />
+    <p class='messages__header-name'>{{this.title}}</p>
+  </div>
+{{/each}}
+`;
+
+export default tpl;

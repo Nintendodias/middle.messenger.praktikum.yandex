@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './MessengerPage.hbs';
+import tmpl from './MessengerPage.tmpl';
 import Router from '../../utils/Router';
 import ContactsItems from '../../components/ContactsItems/index';
 import Messages from '../../components/Messages/index';
@@ -34,16 +35,14 @@ import {
   setStoreChatProperty,
   setMessages,
 } from '../../utils/Store/Actions';
-import State from '../../utils/Store/Store';
 import { sendMessage } from '../../utils/chats';
 
-const store = new State();
-
-addContactsItems();
-setStoreChatProperty();
-setMessages();
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
+
+setStoreChatProperty();
+setMessages();
 
 export default class MessengerPage extends Block {
   constructor(props: TProps) {
@@ -67,11 +66,11 @@ export default class MessengerPage extends Block {
       }),
       new Messages({
         target: '[data-render="messages"]',
-        data: store.getState() ? store.getState().messages : [{}],
+        data: [{}],
       }),
       new ContactsItems({
         target: '[data-render="contacts"]',
-        data: store.getState() ? store.getState().chats : [{}],
+        data: [{}],
       }),
       new Tooltip({
         target: '[data-render="tooltip0"]',
@@ -195,6 +194,7 @@ export default class MessengerPage extends Block {
   }
 
   render() {
+    addContactsItems();
     return this.compile(template, { ...this.props });
   }
 }

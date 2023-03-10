@@ -1,0 +1,17 @@
+/* eslint-disable no-tabs */
+const tpl: string = `
+{{#each data}}
+  <div class='menu__list-item' data-chatId='{{this.id}}'>
+    <img class='item__avatar' src='{{this.avatar}}' alt='' width='47' />
+    <p class='item__name'>{{this.name}}</p>
+    <p class='item__lastMsg'>{{this.lastMsg}}</p>
+    <p class='item__time'>{{this.date}}</p>
+    <div
+      class='item_unreadMsg'
+      style='display: {{isUnreadCount}}'
+    >{{this.unreadMsg}}</div>
+  </div>
+{{/each}}
+`;
+
+export default tpl;

@@ -1,7 +1,9 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './Image.hbs';
-import { getChatProperties } from '../../utils/Store/Actions';
+import tmpl from './Image.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 

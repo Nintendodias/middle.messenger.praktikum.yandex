@@ -1,12 +1,21 @@
+/* eslint-disable import/no-cycle */
 import EventBus from './EventBus';
 import { setMessages, updateMessageArray } from './Store/Actions';
 
 class WebSocketMessages {
+  [x: string]: any;
+
   static instance: WebSocketMessages;
 
   private eventBus: EventBus;
 
-  socket: WebSocketMessages | null;
+  socket: WebSocket | null;
+
+  id: number;
+
+  token: string;
+
+  user: number;
 
   static EVENTS = {
     OPEN: 'open',
@@ -16,7 +25,7 @@ class WebSocketMessages {
     CONNECT: 'connect',
   };
 
-  constructor(id, token, user) {
+  constructor(id: number, token: string, user: number) {
     WebSocketMessages.instance = this;
 
     this.eventBus = new EventBus();
@@ -30,37 +39,40 @@ class WebSocketMessages {
   }
 
   connect() {
-    // if (this.socket?.readyState === WebSocket.OPEN) {
-    //   this.disconnect();
-    // }
+    if (this.socket?.readyState === WebSocket.OPEN) {
+      this.disconnect();
+    }
 
-    const WS_MESSAGES_URL = `wss://ya-praktikum.tech/ws/chats/${this.user}/${this.id}/${this.token}`;
+    const URL = 'wss://ya-praktikum.tech/ws/chats/';
+    const WS_MESSAGES_URL = `${URL}${this.user}/${this.id}/${this.token}`;
 
     this.socket = new WebSocket(WS_MESSAGES_URL);
 
-    this.socket.addEventListener('open', (e) => {
-      this.eventBus.emit(WebSocketMessages.EVENTS.OPEN);
+    if (this.socket) {
+      this.socket.addEventListener('open', () => {
+        this.eventBus.emit(WebSocketMessages.EVENTS.OPEN);
 
-      setInterval(
-        (self: WebSocketMessages) => {
-          self.ping();
-        },
-        10000,
-        this
-      );
-    });
+        setInterval(
+          (self: WebSocketMessages) => {
+            self.ping();
+          },
+          10000,
+          this,
+        );
+      });
 
-    this.socket.addEventListener('close', (event) => {
-      this.eventBus.emit(WebSocketMessages.EVENTS.CLOSE, [event]);
-    });
+      this.socket.addEventListener('close', (event) => {
+        this.eventBus.emit(WebSocketMessages.EVENTS.CLOSE, [event]);
+      });
 
-    this.socket.addEventListener('message', (event) => {
-      this.eventBus.emit(WebSocketMessages.EVENTS.MESSAGE, [event]);
-    });
+      this.socket.addEventListener('message', (event) => {
+        this.eventBus.emit(WebSocketMessages.EVENTS.MESSAGE, [event]);
+      });
 
-    this.socket.addEventListener('error', (event) => {
-      this.eventBus.emit(WebSocketMessages.EVENTS.ERROR, [event]);
-    });
+      this.socket.addEventListener('error', (event) => {
+        this.eventBus.emit(WebSocketMessages.EVENTS.ERROR, [event]);
+      });
+    }
   }
 
   disconnect() {
@@ -76,7 +88,8 @@ class WebSocketMessages {
     this.disconnect();
   }
 
-  onMessage(event) {
+  // eslint-disable-next-line class-methods-use-this
+  onMessage(event: MessageEvent) {
     let data = JSON.parse(event.data);
 
     if (Array.isArray(data)) {
@@ -89,13 +102,14 @@ class WebSocketMessages {
     }
   }
 
-  onError(event) {
+  onError(event: MessageEvent) {
     console.error(event);
 
     this.disconnect();
   }
 
-  sendMessage(content) {
+  sendMessage(content: string) {
+    console.log(content);
     this.socket?.send(JSON.stringify({ content, type: 'message' }));
   }
 
@@ -110,10 +124,7 @@ class WebSocketMessages {
   private registerEvents() {
     this.eventBus.on(WebSocketMessages.EVENTS.OPEN, this.onOpen.bind(this));
     this.eventBus.on(WebSocketMessages.EVENTS.CLOSE, this.onClose.bind(this));
-    this.eventBus.on(
-      WebSocketMessages.EVENTS.MESSAGE,
-      this.onMessage.bind(this)
-    );
+    this.eventBus.on(WebSocketMessages.EVENTS.MESSAGE, this.onMessage.bind(this));
     this.eventBus.on(WebSocketMessages.EVENTS.ERROR, this.onError.bind(this));
     this.eventBus.on(WebSocketMessages.EVENTS.CONNECT, this.connect.bind(this));
   }

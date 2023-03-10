@@ -1,11 +1,16 @@
+/* eslint-disable no-constructor-return */
+/* eslint-disable @typescript-eslint/naming-convention */
 import EventBus from '../EventBus';
+import { IState } from './store.api';
 
 export default class Store extends EventBus {
-  static EVENT_UPDATE: number = 1;
-  static _instance;
+  static EVENT_UPDATE: string = 'updated';
+
+  static _instance: Store;
+
   static STORE_NAME = 'myAppStore';
 
-  _state = {};
+  _state: IState = {};
 
   constructor() {
     if (Store._instance) return Store._instance;
@@ -32,7 +37,7 @@ export default class Store extends EventBus {
     this.emit(Store.EVENT_UPDATE);
   }
 
-  set(id, value) {
+  set(id: string, value: any) {
     this._state[id] = value;
     this.emit(Store.EVENT_UPDATE);
     return this;

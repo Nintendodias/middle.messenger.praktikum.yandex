@@ -1,7 +1,11 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './Messages.hbs';
 import Connect from '../../utils/Store/Connect';
+import { IState } from '../../utils/Store/store.api';
+import tmpl from './Messages.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 
@@ -15,6 +19,4 @@ class Messages extends Block {
   }
 }
 
-export default Connect(Messages, (state) => {
-  return { data: state.messages };
-});
+export default Connect(Messages, (state: IState) => ({ data: state.messages }));

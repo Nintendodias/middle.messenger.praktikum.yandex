@@ -1,7 +1,12 @@
+/* eslint-disable consistent-return */
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './Header.hbs';
 import Connect from '../../utils/Store/Connect';
+import tmpl from './Header.tmpl';
+import { IState } from '../../utils/Store/store.api';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 
@@ -15,20 +20,28 @@ class Header extends Block {
   }
 }
 
-export default Connect(Header, (state) => {
-  const activeChatID = state.activeChat.id;
-  if (activeChatID) {
-    const selectedChat = state.chats.find((chat) => chat.id === activeChatID);
+export default Connect(Header, (state: IState) => {
+  const { activeChat } = state;
+  const { chats } = state;
 
-    return {
-      data: [
-        {
-          url: selectedChat.avatar,
-          width: '44px',
-          height: '44px',
-          title: selectedChat.name,
-        },
-      ],
-    };
+  if (activeChat) {
+    const activeChatID = activeChat.id;
+
+    if (activeChatID && chats) {
+      const selectedChat = chats.find((chat) => chat.id === activeChatID);
+
+      if (selectedChat) {
+        return {
+          data: [
+            {
+              url: selectedChat.avatar,
+              width: '44px',
+              height: '44px',
+              title: selectedChat.name,
+            },
+          ],
+        };
+      }
+    }
   }
 });

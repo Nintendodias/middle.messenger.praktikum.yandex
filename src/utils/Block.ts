@@ -12,7 +12,7 @@ class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  private _element: HTMLElement | null | Array<Element> = null;
+  public _element: HTMLElement | null | Array<Element> = null;
 
   private _children: Array<Element> | null = null;
 
@@ -36,7 +36,7 @@ class Block {
   constructor(
     tagName: string = 'div',
     props: TProps = {},
-    childrenComponents: Array<any> = []
+    childrenComponents: Array<any> = [],
   ) {
     const eventBus = new EventBus();
     this._meta = {
@@ -47,6 +47,7 @@ class Block {
 
     this.eventBus = () => eventBus;
     this.props = this._makePropsProxy(props);
+    this._element = null;
 
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
@@ -113,7 +114,7 @@ class Block {
     return this._element;
   }
 
-  protected render(): DocumentFragment {
+  protected render(): DocumentFragment | undefined {
     return new DocumentFragment();
   }
 
@@ -128,13 +129,16 @@ class Block {
 
   private _render(): void {
     const block = this.render();
-    this._removeEvents();
 
-    if (this._element) {
-      this._children = Array.from(block.children);
-      this._addEvents();
-      this._element = this._children;
-      this._addChildrenComponents();
+    if (block) {
+      this._removeEvents();
+
+      if (this._element) {
+        this._children = Array.from(block.children);
+        this._addEvents();
+        this._element = this._children;
+        this._addChildrenComponents();
+      }
     }
   }
 
@@ -144,17 +148,19 @@ class Block {
 
       if (childrenComponents && childrenComponents.length > 0) {
         childrenComponents.forEach((component) => {
-          if (this._element && this._element[0]) {
-            const qSel = this._element[0].querySelectorAll(
-              component.props.target
-            );
+          if (this._element) {
+            if ((this._element as Array<Element>).length > 0) {
+              const qSel = (
+                this._element as Array<Element>
+              )[0].querySelectorAll(component.props.target);
 
-            if (qSel.length > 0) {
-              const curentElements = component.element;
+              if (qSel.length > 0) {
+                const curentElements: Array<Element> = component.element;
 
-              curentElements.forEach((el) => {
-                qSel[0].appendChild(el);
-              });
+                curentElements.forEach((el) => {
+                  qSel[0].appendChild(el);
+                });
+              }
             }
           }
         });
@@ -191,24 +197,26 @@ class Block {
     if (this._children) {
       this._children.forEach((el, index) => {
         if (this.props) {
-          const proEl = (this.props as TProps).data[index];
+          if ((this.props as TProps).data) {
+            const proEl = (this.props as TProps).data[index];
 
-          if (proEl) {
-            const { events }: Record<string, () => void> = proEl;
+            if (proEl) {
+              const { events }: Record<string, () => void> = proEl;
 
-            if (!events) {
-              return;
-            }
-
-            Object.entries(events).forEach(([event, listener]) => {
-              const target = el.querySelector('input')
-                ? el.querySelector('input')
-                : el;
-
-              if (target) {
-                target.removeEventListener(event, listener);
+              if (!events) {
+                return;
               }
-            });
+
+              Object.entries(events).forEach(([event, listener]) => {
+                const target = el.querySelector('input')
+                  ? el.querySelector('input')
+                  : el;
+
+                if (target) {
+                  target.removeEventListener(event, listener);
+                }
+              });
+            }
           }
         }
       });

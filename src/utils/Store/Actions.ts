@@ -1,20 +1,24 @@
+/* eslint-disable import/no-cycle */
 import Store from './Store';
-import {
-  chats,
-  addUserInChat,
-  getUsersInChat,
-  sendChatAvatar,
-  user,
-} from '../API';
+import { chats, addUserInChat, user } from '../API';
 import { i_avatar } from '../StaticFileExport';
 import { openChats } from '../chats';
+import { IActiveChat, IMessages, IChats } from './store.api';
+
+interface IMsg {
+  content: string;
+  id: number;
+  time: string;
+  type: string;
+  user_id: number;
+}
 
 const store = new Store();
 
 function addContactsItems() {
   chats()
     .then((value) => {
-      const chs = JSON.parse(value);
+      const chs: Array<any> = JSON.parse(value as string);
 
       const result = chs.map((chat) => {
         const avatar = chat.avatar
@@ -35,7 +39,7 @@ function addContactsItems() {
           lastMsg,
           isUnreadCount: chat.unread_count === 0 ? 'none' : 'block',
           events: {
-            click: (event) => {
+            click: (event: MessageEvent) => {
               openChats(event);
             },
           },
@@ -56,34 +60,34 @@ function setStoreChatProperty(id: number | null = null, token: string = '') {
   });
 }
 
-function getChatProperties() {
-  return store.getState()?.activeChat;
+function getChatProperties(): IActiveChat | undefined {
+  return store.getState().activeChat;
 }
 
-function getContactsProperties() {
-  return store.getState()?.chats;
+function getContactsProperties(): Array<IChats> | undefined {
+  return store.getState().chats;
+}
+
+function setUserId(id: number) {
+  store.set('userID', {
+    id,
+  });
 }
 
 function updateUserId() {
   user()
     .then((_value) => {
-      const data = JSON.parse(_value);
+      const data = JSON.parse(_value as string);
 
       if (data) {
-        const id = data.id;
+        const { id } = data;
 
         setUserId(id);
       }
     })
-    .catch(({ reason }) => {
-      console.log(reason);
+    .catch((error) => {
+      console.error(error);
     });
-}
-
-function setUserId(id) {
-  store.set('userID', {
-    id,
-  });
 }
 
 function getUserId() {
@@ -91,58 +95,64 @@ function getUserId() {
 }
 
 function addUsersInChat(id: number) {
-  addUserInChat([getUserId().id, id], getChatProperties().id);
+  const chatProperty = getChatProperties();
+
+  if (chatProperty) {
+    addUserInChat([getUserId().id, id], chatProperty.id);
+  }
 }
 
-function setChatUsers() {
-  getUsersInChat(getChatProperties().id);
-}
-
-function setMessages(data = []) {
+function setMessages(data: Array<any> | [] = []) {
   const msgs =
     data.length !== 0
       ? data.map((msg) => {
-          const date = new Date(msg.time);
-          return {
-            text: msg.content,
-            date: `${date.getHours()}:${date.getMinutes()}`,
-            isSelf: msg.user_id === getUserId().id ? '--self' : '',
-          };
-        })
+        const date = new Date(msg.time);
+        return {
+          text: msg.content,
+          date: `${date.getHours()}:${date.getMinutes()}`,
+          isSelf: msg.user_id === getUserId().id ? '--self' : '',
+        };
+      })
       : [];
 
   store.set('messages', msgs);
 }
 
-function getMessages() {
-  return store.getState()?.messages;
+function getMessages(): Array<IMessages> | undefined {
+  return store.getState().messages;
 }
 
-function updateMessageArray(msg) {
+function updateMessageArray(msg: IMsg) {
   const date = new Date(msg.time);
+  const msgArray = getMessages();
 
-  const msgs = [
-    ...getMessages(),
-    {
-      text: msg.content,
-      date: `${date.getHours()}:${date.getMinutes()}`,
-      isSelf: msg.user_id === getUserId().id ? '--self' : '',
-    },
-  ];
+  if (msgArray) {
+    const msgs = [
+      ...msgArray,
+      {
+        text: msg.content,
+        date: `${date.getHours()}:${date.getMinutes()}`,
+        isSelf: msg.user_id === getUserId().id ? '--self' : '',
+      },
+    ];
 
-  store.set('messages', msgs);
+    store.set('messages', msgs);
+  }
 }
 
 function updateStoreByChangeAvatarChat(avatar: string, chatId: number) {
   const str = getContactsProperties();
-  const findIndexChat = str.findIndex((chat) => chat.id === chatId);
-  const backup = str[findIndexChat];
 
-  backup.avatar = `${avatar}`;
+  if (str) {
+    const findIndexChat = str.findIndex((chat) => chat.id === chatId);
+    const backup = str[findIndexChat];
 
-  str[findIndexChat] = backup;
+    backup.avatar = `${avatar}`;
 
-  store.set('chats', str);
+    str[findIndexChat] = backup;
+
+    store.set('chats', str);
+  }
 }
 
 export {
@@ -152,7 +162,6 @@ export {
   setUserId,
   getUserId,
   addUsersInChat,
-  setChatUsers,
   setMessages,
   updateMessageArray,
   updateStoreByChangeAvatarChat,

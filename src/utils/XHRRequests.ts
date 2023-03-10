@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 export enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -7,7 +8,7 @@ export enum METHODS {
 }
 
 type Topt = {
-  headers?: Record<string, string>;
+  headers?: Record<string, string> | null;
   method?: METHODS;
   timeout?: number;
   data?: any;
@@ -52,7 +53,7 @@ class HTTPTransport {
           url = `${url}?${Object.entries(data)
             .map(
               ([key, value]: [key: string, value: any]): string =>
-                `${key}=${value}`
+                `${key}=${value}`,
             )
             .join('&')}`;
         }

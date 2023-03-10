@@ -26,7 +26,7 @@ interface IComponentProps {
 export class Route {
   private _pathname: string;
 
-  private _blockClass: Block;
+  private _blockClass: any;
 
   private _block: Block;
 
@@ -38,7 +38,7 @@ export class Route {
     pathname: string,
     view: Block,
     props: IRouterProps,
-    componentProps: IComponentProps
+    componentProps: IComponentProps,
   ) {
     this._pathname = pathname;
     this._blockClass = view;
@@ -100,12 +100,12 @@ export default class Router {
     return this.__instance;
   }
 
-  use(pathname: string, block: Block, props: IRouterProps) {
+  use(pathname: string, block: any, props: {}) {
     const route = new Route(
       pathname,
       block,
       { rootQuery: this._rootQuery },
-      props
+      props,
     );
 
     this.routes.push(route);

@@ -1,7 +1,7 @@
 import '../modal.less';
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../../utils/Block';
-import template from './ModalAddUsersInChat.hbs';
 import Title20 from '../../Title20';
 import Input from '../../Input';
 import Button from '../../Button';
@@ -9,6 +9,9 @@ import { onSubmit, validate } from '../../../utils/InputsValidation';
 import Image from '../../Image';
 import { i_close } from '../../../utils/StaticFileExport';
 import closeModal from '../../../utils/closeModal';
+import tmpl from './ModalAddUsersInChat.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 

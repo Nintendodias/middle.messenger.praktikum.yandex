@@ -1,12 +1,15 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './LoginPage.hbs';
+import tmpl from './LoginPage.tmpl';
 import Input from '../../components/Input';
 import Title20 from '../../components/Title20';
 import Button from '../../components/Button';
 import Links from '../../components/Links';
 import { onSubmit, validate } from '../../utils/InputsValidation';
 import Router from '../../utils/Router';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 
