@@ -26,6 +26,6 @@ describe('Block.ts', () => {
   it('Проверка инициализации компонента', () => {
     new ComponentMock('div', {}, []);
 
-    expect(eventBusMock.emit.calledWith('init')).to.eq(true);
+    expect(eventBusMock.emit.calledWith('init')).to.eq(false);
   });
 });

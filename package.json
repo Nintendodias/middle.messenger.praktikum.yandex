@@ -10,7 +10,8 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve",
-    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix"
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
