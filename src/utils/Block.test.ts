@@ -1,31 +1,108 @@
 /* eslint-disable no-new */
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-extraneous-dependencies */
-import proxyquire from 'proxyquire';
 import { expect } from 'chai';
-import sinon from 'sinon';
-import type BlockType from './Block';
-
-const eventBusMock = {
-  on: sinon.fake(),
-  emit: sinon.fake(),
-};
-
-const { default: Block } = proxyquire('./Block', {
-  './EventBus': {
-    EventBus: class {
-      emit = eventBusMock.emit;
-
-      on = eventBusMock.on;
-    },
-  },
-}) as { default: typeof BlockType };
+import Handlebars from 'handlebars';
+import Block from './Block';
 
 describe('Block.ts', () => {
-  class ComponentMock extends Block {}
+  let isMounted = false;
+  let isRendered = false;
+  // let isRenderAfterUpdate = false;
 
-  it('Проверка инициализации компонента', () => {
-    new ComponentMock('div', {}, []);
+  const tpl: string = `
+{{#each data}}
+  <div class='text-link {{this.className}} '>{{this.text}}</div>
+{{/each}}
+`;
 
-    expect(eventBusMock.emit.calledWith('init')).to.eq(false);
+  const template = Handlebars.compile(tpl);
+
+  type TProps = {
+    target: string;
+    data: [
+      {
+        className: string;
+        text: string;
+      },
+    ];
+  };
+
+  class TestComponent extends Block {
+    constructor(
+      props:
+        | TProps
+        | {
+            target: string;
+            data: [{}];
+          },
+    ) {
+      super('div', props);
+    }
+
+    componentDidMount() {
+      isMounted = true;
+    }
+
+    render() {
+      isRendered = true;
+      return this.compile(template, { ...this.props });
+    }
+  }
+
+  new TestComponent({
+    target: '[data-render="links"]',
+    data: [
+      {
+        className: 'text-center',
+        text: 'Нет аккаунта?',
+      },
+    ],
+  });
+
+  it('componentDidMount()', () => {
+    expect(isMounted).to.eq(true);
+  });
+
+  it('Render()', () => {
+    expect(isRendered).to.eq(true);
+  });
+
+  it('Создание экземпляра класса с props', () => {
+    const testComponentWithoutProps = new TestComponent({
+      target: '[data-render="links"]',
+      data: [
+        {
+          className: 'text-center',
+          text: 'Test',
+        },
+      ],
+    });
+
+    expect((testComponentWithoutProps.props as TProps).data[0].text).to.eq('Test');
+  });
+
+  it('setProps()', () => {
+    const testComponentWithoutProps = new TestComponent({
+      target: '[data-render="links"]',
+      data: [
+        {
+          className: 'text-center',
+          text: 'Test',
+        },
+      ],
+    });
+
+    const newProps = {
+      data: [
+        {
+          className: 'text-center',
+          text: 'Test 2',
+        },
+      ],
+    };
+
+    testComponentWithoutProps.setProps(newProps);
+    expect((testComponentWithoutProps.props as TProps).data[0].text).to.eq('Test 2');
   });
 });

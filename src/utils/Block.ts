@@ -91,7 +91,7 @@ class Block {
     return oldProps !== newProps;
   }
 
-  public setProps = (nextProps: unknown[]): void => {
+  public setProps = (nextProps: any): void => {
     if (!nextProps) {
       return;
     }
