@@ -7,7 +7,7 @@
     "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'",
     "build": "webpack --mode=production --node-env=production",
     "serve": "webpack serve",
-    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "npx eslint . --ext .js,.jsx,.ts,.tsx",
     "prepare": "husky install"
   },
   "husky": {

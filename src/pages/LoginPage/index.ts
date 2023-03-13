@@ -8,6 +8,8 @@ import Button from '../../components/Button';
 import Links from '../../components/Links';
 import { onSubmit, validate } from '../../utils/InputsValidation';
 import Router from '../../utils/Router';
+import { user } from '../../utils/API';
+import { setUserId } from '../../utils/Store/Actions';
 
 const template = Handlebars.compile(tmpl);
 
@@ -86,6 +88,13 @@ export default class LoginPage extends Block {
   }
 
   render() {
+    user()
+      .then((value) => {
+        setUserId(JSON.parse(value as string).id);
+        if (window.location.pathname !== '/profile') {
+          Router.getInstance().go('/messenger');
+        }
+      });
     return this.compile(template, { ...this.props });
   }
 }
