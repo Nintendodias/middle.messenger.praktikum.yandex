@@ -1,12 +1,17 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './LoginPage.hbs';
+import tmpl from './LoginPage.tmpl';
 import Input from '../../components/Input';
 import Title20 from '../../components/Title20';
 import Button from '../../components/Button';
 import Links from '../../components/Links';
 import { onSubmit, validate } from '../../utils/InputsValidation';
 import Router from '../../utils/Router';
+import { user } from '../../utils/API';
+import { setUserId } from '../../utils/Store/Actions';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 
@@ -83,6 +88,15 @@ export default class LoginPage extends Block {
   }
 
   render() {
+    user()
+      .then((value) => {
+        setUserId(JSON.parse(value as string).id);
+        if (window.location.pathname !== '/profile') {
+          Router.getInstance().go('/messenger');
+        }
+      }).catch(({ reason }) => {
+        console.error(reason);
+      });
     return this.compile(template, { ...this.props });
   }
 }

@@ -1,6 +1,9 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './ButtonTooltip.hbs';
+import tmpl from './ButtonTooltip.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 
@@ -16,9 +19,20 @@ export class ButtonTooltip extends Block {
 
 export const openTooltip = (event: any): void => {
   const parent: Element = event.target.parentNode.parentNode;
-  const tooltip: Element | null = parent.querySelector('.tooltip ');
+  const tooltip: Element | null = parent.querySelector('.tooltip');
 
   if (tooltip) {
-    tooltip.classList.toggle('_active');
+    tooltip.classList.add('_active');
+  }
+};
+
+export const closeTooltip = (event: any): void => {
+  const parent: Element = event.target.parentNode.parentNode;
+  const tooltip: Element | null = parent.querySelector('.tooltip._active');
+
+  if (tooltip) {
+    setTimeout(() => {
+      tooltip.classList.remove('_active');
+    }, 500);
   }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable implicit-arrow-linebreak */
 export enum METHODS {
   GET = 'GET',
   POST = 'POST',
@@ -7,7 +8,7 @@ export enum METHODS {
 }
 
 type Topt = {
-  headers?: Record<string, string>;
+  headers?: Record<string, string> | null;
   method?: METHODS;
   timeout?: number;
   data?: any;
@@ -18,17 +19,13 @@ type HTTPMethod = (url: string, opt?: Topt) => Promise<unknown>;
 const baseUrl = 'https://ya-praktikum.tech/api/v2/';
 
 class HTTPTransport {
-  get: HTTPMethod = (url, opt = {}) =>
-    this.request(url, { ...opt, method: METHODS.GET });
+  get: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.GET });
 
-  post: HTTPMethod = (url, opt = {}) =>
-    this.request(url, { ...opt, method: METHODS.POST });
+  post: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.POST });
 
-  put: HTTPMethod = (url, opt = {}) =>
-    this.request(url, { ...opt, method: METHODS.PUT });
+  put: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.PUT });
 
-  delete: HTTPMethod = (url, opt = {}) =>
-    this.request(url, { ...opt, method: METHODS.DELETE });
+  delete: HTTPMethod = (url, opt = {}) => this.request(url, { ...opt, method: METHODS.DELETE });
 
   // Он ругается на то, что в этом методе не используется контекст класса.
   // Я считаю, в данном случае имеет смысл ESList проигнорировать,
@@ -50,10 +47,7 @@ class HTTPTransport {
       if (isGet) {
         if (data) {
           url = `${url}?${Object.entries(data)
-            .map(
-              ([key, value]: [key: string, value: any]): string =>
-                `${key}=${value}`
-            )
+            .map(([key, value]: [key: string, value: any]): string => `${key}=${value}`)
             .join('&')}`;
         }
       }

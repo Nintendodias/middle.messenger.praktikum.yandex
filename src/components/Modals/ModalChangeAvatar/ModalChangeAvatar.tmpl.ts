@@ -1,0 +1,17 @@
+/* eslint-disable no-tabs */
+const tpl: string = `
+{{#each data}}
+  <div>
+    <div data-render='title20'></div>
+    <form method='post' enctype='multipart/form-data'>
+      <label class='input-file'>
+        <input type='file' name='file' accept='image/*,image/jpeg' />
+      </label>
+      <div data-render='button_wrapper'></div>
+    </form>
+    <div data-render='img'></div>
+  </div>
+{{/each}}
+`;
+
+export default tpl;

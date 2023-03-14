@@ -1,0 +1,14 @@
+/* eslint-disable no-tabs */
+const tpl: string = `
+{{#each data}}
+  <main class='wrapper'>
+    <div>
+      <h1 class='title40'>500</h1>
+      <h2 class='s-title20'>Мы уже фиксим</h2>
+      <div data-render='links'></div>
+    </div>
+  </main>
+{{/each}}
+`;
+
+export default tpl;

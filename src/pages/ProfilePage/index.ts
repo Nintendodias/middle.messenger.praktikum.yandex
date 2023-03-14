@@ -1,6 +1,6 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './ProfilePage.hbs';
 import Title20 from '../../components/Title20/index';
 import openModal from '../../utils/openModal';
 import changeProfileData from '../../utils/changeProfileData';
@@ -15,12 +15,29 @@ import { user, logout } from '../../utils/API';
 import Router from '../../utils/Router';
 import ModalChangePassword from '../../components/Modals/ModalChangePassword';
 import ModalChangeAvatar from '../../components/Modals/ModalChangeAvatar';
+import tmpl from './ProfilePage.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 
 export default class ProfilePage extends Block {
   constructor(props: TProps) {
     super('div', props, [
+      new Links({
+        target: '[data-render="links2"]',
+        data: [
+          {
+            className: 'text-center',
+            text: 'Вернуться к чатам',
+            events: {
+              click: () => {
+                Router.getInstance().go('/messenger');
+              },
+            },
+          },
+        ],
+      }),
       new ModalChangePassword({
         target: '[data-render="modal0"]',
         data: [{}],
@@ -141,7 +158,7 @@ export default class ProfilePage extends Block {
             text: 'Выйти',
             events: {
               click: () => {
-                logout().then((_value) => {
+                logout().then(() => {
                   Router.getInstance().go('/');
                 });
               },
@@ -183,25 +200,35 @@ export default class ProfilePage extends Block {
 
   componentDidMount() {
     user().then((value) => {
-      const data = JSON.parse(value);
-      const inputs = this.element[0].querySelectorAll('.form__input[readonly]');
+      const data = JSON.parse(value as string);
+      const el = this.element;
 
-      inputs.forEach((input) => {
-        const { id } = input;
+      if (el) {
+        const element = (el as Element[])[0];
 
-        if (data[id]) {
-          input.setAttribute('value', data[id]);
+        if (element) {
+          const inputs = element.querySelectorAll('.form__input[readonly]');
+
+          inputs.forEach((input: HTMLInputElement) => {
+            const { id } = input;
+
+            if (data[id]) {
+              input.setAttribute('value', data[id]);
+            }
+
+            if (id === 'display_name' && !data.display_name) {
+              input.setAttribute('value', data.login);
+            }
+          });
+
+          const place = element.querySelector('.profile_avatar img');
+
+          if (place && data.avatar) {
+            (
+              place as HTMLImageElement
+            ).src = `https://ya-praktikum.tech/api/v2/resources${data.avatar}`;
+          }
         }
-
-        if (id === 'display_name' && !data.display_name) {
-          input.setAttribute('value', data.login);
-        }
-      });
-
-      const place = this.element[0].querySelector('.profile_avatar img');
-
-      if (place && data.avatar) {
-        place.src = `https://ya-praktikum.tech/api/v2/resources${data.avatar}`;
       }
     });
   }

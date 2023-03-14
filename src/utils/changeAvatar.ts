@@ -15,8 +15,10 @@ export default function changeAvatar(event: any): void {
       fd.append('avatar', file);
 
       sendAvatar(fd).then((value) => {
-        const data = JSON.parse(value);
-        const place = document.body.querySelector('.profile_avatar img');
+        const data = JSON.parse(value as string);
+        const place: HTMLImageElement | null = document.body.querySelector(
+          '.profile_avatar img',
+        );
 
         if (place) {
           place.src = `https://ya-praktikum.tech/api/v2/resources${data.avatar}`;

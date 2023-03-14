@@ -1,18 +1,25 @@
-## Стек
+### Описание
 
-Parcel, EJS, Express JS
+[Netlify](https://subtle-khapse-af4972.netlify.app)
 
-## Установка
+[Макет](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=1%3A498&t=gQns60FsYEIMNZXK-0)
+
+### Установка
 
 - `npm install` — установка стабильной версии,
-- `npm run dev` — запуск версии для разработчика,
-- `npm run build` — сборка стабильной версии.
-- `npm run start` — звапуск static файла сборки через express на 3000 порту.
+- `npm run serve` — запуск дев версии,
+- `npm run build` — сборка стабильной версии,
+- `npm run lint` — проферка и автофикс багов eslint,
+- `npm run test` — запуск автотестов chai и mocha,
 
-## **Полезные ссылки**
+### Сборка и запуск docker-образа
 
-![Ссылки](https://subtle-khapse-af4972.netlify.app/) - ссылка на Netlify
-![Ссылки](<https://www.figma.com/file/dkwUxkhvZEMWdX3687Rs9l/Chat_external_link-(Copy)?node-id=1%3A600&t=wtNdIgpdqE4lwIUG-0>) - ссылка на макет в Figma
-![Ссылки](https://parceljs.org/docs/)
-![Ссылки](https://ejs.co/)
-![Ссылки](https://expressjs.com/ru/guide/routing.html)
+1. `docker build -t messenger .` - сборка образа
+2. `docker images` - просмотр существующих образов
+3. `docker run -d -p {port}:3000 {image_id}` - запуск контейнера
+4. `docker ps` - просмотр запущенных контейнеров
+5. Перейти на `localhost:{port}`
+
+### Настроен Husky
+
+- `pre-commit` — npm run test && npm run lint,

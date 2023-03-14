@@ -17,22 +17,27 @@ export default function changeChatAvatar(event: any): void {
       const fd = new FormData();
 
       fd.append('avatar', file);
-      fd.append('chatId', `${getChatProperties().id}`);
 
-      sendChatAvatar(fd)
-        .then((value) => {
-          const data = JSON.parse(value);
+      const chatProp = getChatProperties();
 
-          updateStoreByChangeAvatarChat(
-            `https://ya-praktikum.tech/api/v2/resources${data.avatar}`,
-            data.id
-          );
+      if (chatProp) {
+        fd.append('chatId', `${chatProp.id}`);
 
-          closeModal(0);
-        })
-        .catch(({ reason }) => {
-          console.log(reason);
-        });
+        sendChatAvatar(fd)
+          .then((value) => {
+            const data = JSON.parse(value as string);
+
+            updateStoreByChangeAvatarChat(
+              `https://ya-praktikum.tech/api/v2/resources${data.avatar}`,
+              data.id,
+            );
+
+            closeModal(0);
+          })
+          .catch(({ reason }) => {
+            console.log(reason);
+          });
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+import './global.less';
 import Router from './utils/Router';
 import LoginPage from './pages/LoginPage';
 import SignInPage from './pages/SignInPage';

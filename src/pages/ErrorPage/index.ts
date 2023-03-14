@@ -1,9 +1,14 @@
+/* eslint-disable consistent-return */
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import ErrorPage400TMPL from './ErrorPage400.hbs';
-import ErrorPage500TMPL from './ErrorPage500.hbs';
+import ErrorPage400 from './ErrorPage400.tmpl';
+import ErrorPage500 from './ErrorPage500.tmpl';
 import Router from '../../utils/Router';
 import Links from '../../components/Links';
+
+const ErrorPage400TMPL = Handlebars.compile(ErrorPage400);
+const ErrorPage500TMPL = Handlebars.compile(ErrorPage500);
 
 type TProps = Record<string, unknown>;
 
@@ -28,12 +33,24 @@ export default class ErrorPage extends Block {
   }
 
   render() {
-    switch ({ ...this.props }.data[0].code) {
-      case 404: {
-        return this.compile(ErrorPage400TMPL, { ...this.props });
+    const props = { ...this.props } as { data: [{}] };
+
+    if (Object.keys(props).length > 0) {
+      const { data } = props;
+
+      if (data) {
+        const param = data[0];
+
+        if (param) {
+          const { code } = param as { code: number };
+
+          if (code && code === 404) {
+            return this.compile(ErrorPage400TMPL, { ...this.props });
+          }
+
+          return this.compile(ErrorPage500TMPL, { ...this.props });
+        }
       }
-      default:
-        return this.compile(ErrorPage500TMPL, { ...this.props });
     }
   }
 }

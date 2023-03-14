@@ -1,6 +1,9 @@
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../utils/Block';
-import template from './Title20.hbs';
+import tmpl from './Title20.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 

@@ -1,7 +1,7 @@
 import '../modal.less';
 import './index.less';
+import Handlebars from 'handlebars';
 import Block from '../../../utils/Block';
-import template from './ModalChangeAvatar.hbs';
 import Input from '../../Input';
 import { validate } from '../../../utils/InputsValidation';
 import Button from '../../Button';
@@ -11,6 +11,9 @@ import closeModal from '../../../utils/closeModal';
 import Title20 from '../../Title20';
 import changeAvatar from '../../../utils/changeAvatar';
 import changeChatAvatar from '../../../utils/changeChatAvatar';
+import tmpl from './ModalChangeAvatar.tmpl';
+
+const template = Handlebars.compile(tmpl);
 
 type TProps = Record<string, unknown>;
 

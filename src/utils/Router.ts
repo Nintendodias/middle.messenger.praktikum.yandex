@@ -26,7 +26,7 @@ interface IComponentProps {
 export class Route {
   private _pathname: string;
 
-  private _blockClass: Block;
+  private _blockClass: any;
 
   private _block: Block;
 
@@ -34,12 +34,7 @@ export class Route {
 
   private _componentProps: IComponentProps;
 
-  constructor(
-    pathname: string,
-    view: Block,
-    props: IRouterProps,
-    componentProps: IComponentProps
-  ) {
+  constructor(pathname: string, view: Block, props: IRouterProps, componentProps: IComponentProps) {
     this._pathname = pathname;
     this._blockClass = view;
     this._props = props;
@@ -79,7 +74,7 @@ export default class Router {
 
   private routes: Route[];
 
-  private _currentRoute: Route;
+  private _currentRoute: Route | null = null;
 
   private _rootQuery: string;
 
@@ -100,20 +95,14 @@ export default class Router {
     return this.__instance;
   }
 
-  use(pathname: string, block: Block, props: IRouterProps) {
-    const route = new Route(
-      pathname,
-      block,
-      { rootQuery: this._rootQuery },
-      props
-    );
+  public use(pathname: string, block: any, props: {}) {
+    const route = new Route(pathname, block, { rootQuery: this._rootQuery }, props);
 
     this.routes.push(route);
-
     return this;
   }
 
-  start() {
+  public start() {
     window.onpopstate = (event: any) => {
       this._onRoute(event.currentTarget?.location.pathname);
     };
@@ -132,20 +121,25 @@ export default class Router {
     route.render();
   }
 
-  go(pathname: string) {
+  public go(pathname: string) {
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
-  back() {
+  public back() {
     this.history.back();
   }
 
-  forward() {
+  public forward() {
     this.history.forward();
   }
 
-  getRoute(pathname: string) {
+  public reset() {
+    this.routes = [];
+    this._currentRoute = null;
+  }
+
+  public getRoute(pathname: string) {
     return this.routes.find((route) => route.match(pathname));
   }
 }
