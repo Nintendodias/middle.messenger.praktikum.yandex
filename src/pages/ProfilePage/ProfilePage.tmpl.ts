@@ -13,6 +13,8 @@ const tpl: string = `
       <div data-render='links'></div>
       <div class='modal' data-render='modal0'></div>
       <div class='modal' data-render='modal1'></div>
+      
+    <div data-render='links2'></div>
     </div>
   </main>
 {{/each}}

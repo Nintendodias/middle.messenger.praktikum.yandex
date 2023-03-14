@@ -12,6 +12,7 @@ import Header from '../../components/Header';
 import {
   ButtonTooltip,
   openTooltip,
+  closeTooltip
 } from '../../components/ButtonTooltip/index';
 import {
   i_profile,
@@ -136,7 +137,8 @@ export default class MessengerPage extends Block {
             className: 'burger__menu',
             link: i_burger,
             events: {
-              click: openTooltip,
+              mouseover: openTooltip,
+              mouseout: closeTooltip,
             },
           },
         ],
@@ -148,7 +150,8 @@ export default class MessengerPage extends Block {
             className: 'msg__icon',
             link: i_includes,
             events: {
-              click: openTooltip,
+              mouseover: openTooltip,
+              mouseout: closeTooltip,
             },
           },
         ],
@@ -160,7 +163,8 @@ export default class MessengerPage extends Block {
             className: 'burger__menu',
             link: i_burger,
             events: {
-              click: openTooltip,
+              mouseover: openTooltip,
+              mouseout: closeTooltip,
             },
           },
         ],

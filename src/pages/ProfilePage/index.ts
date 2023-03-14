@@ -24,6 +24,20 @@ type TProps = Record<string, unknown>;
 export default class ProfilePage extends Block {
   constructor(props: TProps) {
     super('div', props, [
+      new Links({
+        target: '[data-render="links2"]',
+        data: [
+          {
+            className: 'text-center',
+            text: 'Вернуться к чатам',
+            events: {
+              click: () => {
+                Router.getInstance().go('/messenger');
+              },
+            },
+          },
+        ],
+      }),
       new ModalChangePassword({
         target: '[data-render="modal0"]',
         data: [{}],

@@ -94,6 +94,8 @@ export default class LoginPage extends Block {
         if (window.location.pathname !== '/profile') {
           Router.getInstance().go('/messenger');
         }
+      }).catch(({ reason }) => {
+        console.error(reason);
       });
     return this.compile(template, { ...this.props });
   }

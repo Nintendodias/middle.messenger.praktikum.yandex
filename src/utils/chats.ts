@@ -4,6 +4,7 @@ import { connectToChat, getChatUsers } from './API';
 import openModal from './openModal';
 import { setStoreChatProperty, getChatProperties, getUserId } from './Store/Actions';
 import WS from './WS';
+import scrollDown from './scrollDown';
 
 let websoket: WS;
 
@@ -40,6 +41,10 @@ const openChats = (event: Event) => {
                 if (mask) {
                   mask.classList.add('_active');
                 }
+
+                setTimeout(() => {
+                  scrollDown();
+                }, 100);
               })
               .catch(({ reason }) => {
                 console.error(reason);
@@ -60,8 +65,16 @@ const sendMessage = (event: Event) => {
     const textarea = form?.querySelector('textarea');
 
     if (textarea) {
+      if (textarea.value === '') {
+        return;
+      }
+
       websoket.sendMessage(textarea.value);
       textarea.value = '';
+
+      setTimeout(() => {
+        scrollDown();
+      }, 100);
     }
   }
 };
